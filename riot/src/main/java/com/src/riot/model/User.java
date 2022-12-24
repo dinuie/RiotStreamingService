@@ -2,28 +2,30 @@ package com.src.riot.model;
 
 
 import com.src.riot.model.types.UserStatus;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @Column(unique = true)
     private String userName;
     private LocalDate userDateOfBirth;
+    @Column(unique = true)
     private String userEmail;
     private String userPassword;
+    @Enumerated(value = EnumType.STRING)
     private UserStatus userStatus;
 
 }
