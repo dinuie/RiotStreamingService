@@ -4,11 +4,10 @@ const SearchBox = (props) => {
     return (
         <div className='col col-sm-4'>
             <input
-                type="email"
                 className='form-control'
                 value={props.value}
-                onChange={(event) => props.setSearchValue(event.target.value)}
-                placeholder='Write your Email...'
+                onChange={(event) => props.setSearchValuePass(event.target.value)}
+                placeholder='Write your Password...'
             ></input>
         </div>
     );
