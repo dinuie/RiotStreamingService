@@ -5,6 +5,8 @@ import com.src.riot.service.DAO.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -14,14 +16,25 @@ public class UserService {
         this.userRepository = userDao;
     }
 
-    public User createNewUser(User user) {
-        User newUser = userRepository.createUser(user);
-        return newUser;
+//    public User createNewUser(User user) {
+//        User newUser = userRepository.createUser(user);
+//        return newUser;
+//    }
+
+    public List<User> userList() {
+        return userRepository.findAll();
     }
-    public User userLogin(String userEmail, String userPassword) {
-        return userRepository.userLogin(userEmail, userPassword);
+
+    public User userLoginEmail(String userEmail) {
+        return userRepository.userLoginEmail(userEmail);
     }
-    public void removeUserById(Long userId){
-         userRepository.deleteById(userId);
+
+    public User userLoginPassword(String userPassword,String userEmail) {
+        return userRepository.userLoginPass(userPassword,userEmail);
+    }
+
+
+    public void removeUserById(Long userId) {
+        userRepository.deleteById(userId);
     }
 }

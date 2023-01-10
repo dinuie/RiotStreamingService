@@ -6,10 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User,Long> {
-    User createUser(User user);
-    @Query(value ="select u from User u where u.userEmail=:#{#u.email}",nativeQuery = true)
-    User userLogin(@Param("email") String userEmail, String userPassword);
-    boolean checkUserDetails(User user);
-
-    void removeUser(User user);
+//    User createUser(User user);
+    @Query("SELECT u FROM User u where u.userEmail=?1")
+    User userLoginEmail(String userEmail);
+    @Query("SELECT u FROM User u where u.userPassword=?1 and u.userEmail=?2")
+    User userLoginPass(String userPassword,String userEmail);
+//    boolean checkUserDetails(User user);
+//
+//    void removeUser(User user);
 }
