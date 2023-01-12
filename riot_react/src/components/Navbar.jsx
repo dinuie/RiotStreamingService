@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className='flex items-center justify-between p-4 z-[100] w-full absolute'>
         <h1 className='text-purple-600 text-3xl font-bold cursor-pointer'>RIOT STREAM SERVICE</h1>
         <div>
-          <SearchBox></SearchBox>
+          {/* <SearchBox></SearchBox> */}
         </div>
         <div>
             <button className='text-white font-bold pr-4'>Sign In</button>
