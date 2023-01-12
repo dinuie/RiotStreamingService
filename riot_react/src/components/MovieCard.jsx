@@ -15,6 +15,7 @@ function MovieCard({enName, year, imbd, time, img}) {
         // onClick={(e)=>handleChosenMovie(id)}
         className={" w-full rounded-xl bg-cover "}
         style={{height:"100%"}}
+        alt={enName}
         src={"https://www.themoviedb.org/t/p/original"+img} />
       </Link>
       <div className="clear-both" />
