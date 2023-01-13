@@ -3,7 +3,7 @@ import MOVIES_DATA from "../util/movies_data.js";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 function Home() {
-  const maxLoadMovies = 50;
+  const maxLoadMovies = 200;
   const [isAtTop, changeGoToTop] = useState(false);
   // const handleChosenMovie = (id, name) => {
   //   localStorage.setItem(
@@ -141,7 +141,7 @@ function Home() {
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }
                 >
-                  UP
+                  Back to Top
                 </button>
               ) : (
                 ""

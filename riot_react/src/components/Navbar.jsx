@@ -4,7 +4,7 @@ import SearchBox from './Searchbox'
 const Navbar = () => {
   return (
     <div className='flex items-center justify-between p-4 z-[100] w-full absolute'>
-        <h1 className='text-purple-600 text-3xl font-bold cursor-pointer'>RIOT STREAM SERVICE</h1>
+        <h1 className='text-purple-600 text-3xl font-bold cursor-pointer'>RIOT STREAMING SERVICE</h1>
         <div>
           {/* <SearchBox></SearchBox> */}
         </div>
