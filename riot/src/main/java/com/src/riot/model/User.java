@@ -1,18 +1,13 @@
 package com.src.riot.model;
 
 
-import com.src.riot.model.types.UserStatus;
+import com.src.riot.model.types.RoleName;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.NaturalId;
-
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Data
@@ -25,13 +20,14 @@ import java.util.Objects;
 public class User {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true)
     @NotBlank
     @Size(max = 40)
-    private String userName;
-    private LocalDate userDateOfBirth;
+    private String username;
+    @NotBlank
+    private String userDateOfBirth;
     @Column(unique = true)
     @NaturalId
     @NotBlank
@@ -39,16 +35,25 @@ public class User {
     @Email
     private String userEmail;
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 4000)
     private String userPassword;
-    @ManyToMany
+
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private RoleName roles;
+
+    public User(String userName, String userDateOfBirth, String userEmail, String userPassword, RoleName roles) {
+        this.username = userName;
+        this.userDateOfBirth = userDateOfBirth;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.roles = roles;
+    }
+
 
 //    @Override
 //    public boolean equals(Object o) {
