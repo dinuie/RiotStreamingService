@@ -1,6 +1,8 @@
 package com.src.riot.controller;
 
+import com.src.riot.model.Movie;
 import com.src.riot.model.User;
+import com.src.riot.service.MovieService;
 import com.src.riot.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class WelcomeController {
+
+    private final MovieService movieService;
     private final UserService userService;
 
-    public WelcomeController(UserService userService) {
+    public WelcomeController(MovieService movieService, UserService userService) {
+        this.movieService = movieService;
         this.userService = userService;
     }
 
@@ -31,6 +36,20 @@ public class WelcomeController {
         return userService.userLoginEmail(email);
 
     }
+    @GetMapping
+    public List<Movie> movieList() {
+        return movieService.movieList();
+    }
+
+//    @PostMapping("/login")
+//    public ResponseEntity<String> login(@RequestBody User user){
+//
+//    }
+//
+//    @PostMapping("/Register")
+//    private ResponseEntity<String> registration(@RequestBody User user){
+//
+//    }
 
 }
 
