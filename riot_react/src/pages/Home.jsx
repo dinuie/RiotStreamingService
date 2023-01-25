@@ -1,7 +1,5 @@
 import MovieCard from "../components/MovieCard"
-import MOVIES_DATA from "../util/movies_data.js";
 import {useCallback, useEffect, useState} from "react";
-import {Link} from "react-router-dom";
 
 function Home() {
     const maxLoadMovies = 200;
@@ -12,7 +10,7 @@ function Home() {
 
     const movieList = async () => {
         await fetch('api', {})
-            .then( response =>  response.json())
+            .then(response => response.json())
             .then(data => {
                 changeSearched(data)
             })
@@ -33,6 +31,7 @@ function Home() {
             changeIsSearched(text);
             console.log(searchedArray)
             let filteredArray = searchedArray.filter(function (obj) {
+
                 return (
                     obj.english_title.toUpperCase().includes(text.toUpperCase())
                 );
@@ -53,7 +52,7 @@ function Home() {
                 searchedArray)
             changeIsSearched("");
         }
-    }, []);
+    },[]);
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 200) {

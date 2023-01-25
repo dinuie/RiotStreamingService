@@ -13,7 +13,7 @@ const Navbar = () => {
             <div><Link to="/auth/login">
                 <button className='text-white font-bold pr-4'>Sign In</button>
             </Link>
-                <Link to="/register">
+                <Link to="/auth/register">
                     <button className='bg-purple-600 font-bold px-3 py-2 rounded cursor-pointer text-black'>Sign Up
                     </button>
                 </Link>
