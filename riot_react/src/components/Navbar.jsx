@@ -1,7 +1,8 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom"
+import SearchBox from './Searchbox'
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <div 
         className='flex items-center justify-between p-4 z-[100] w-full absolute'
@@ -12,7 +13,7 @@ const Navbar = () => {
                 </h1>
             </Link>
             <div>
-                {/* <SearchBox></SearchBox> */}
+            <SearchBox handleSearch={props.handleSearch} />
             </div>
             <div><Link to="/auth/login">
                 <button className='text-white font-bold pr-4'>Sign In</button>

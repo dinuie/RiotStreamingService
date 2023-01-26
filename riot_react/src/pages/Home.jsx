@@ -1,69 +1,74 @@
 import MovieCard from "../components/MovieCard"
-import {useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from 'react';
+import Navbar from "../components/Navbar";
 
 function Home() {
     const [isAtTop, changeGoToTop] = useState(false);
-
     const [searchedArray, changeSearched] = useState([false]);
-
     const [startIndex, changeStartIndex] = useState(0);
 
-
-    const movieList = async () => {
-        await fetch('api', {})
-            .then(response => response.json())
-            .then(data => {
-                changeSearched(searchedArray.concat(data.slice(startIndex, startIndex + 20)));
-            })
-            .then(function (response) {
-                console.log(`Fetch complete. (Not aborted)`);
-            }).catch(function (err) {
-                console.error(` Err: ${err}`);
-            });
+    const movieList = async (searchText) => {
+        if(searchText){
+            await fetch(`api?title=${searchText}`)
+                .then(response => response.json())
+                .then(data => {
+                    changeSearched(data);
+                })
+                .catch(function (err) {
+                    console.error(` Err: ${err}`);
+                });
+        }else{
+            await fetch(`api?startIndex=${startIndex}`)
+                .then(response => response.json())
+                .then(data => {
+                    changeSearched(searchedArray.concat(data.slice(startIndex, startIndex + 20)));
+                })
+                .catch(function (err) {
+                    console.error(` Err: ${err}`);
+                });
+        }
     }
+    
     useEffect(()=>{
-        movieList(startIndex)
+        movieList()
     },[startIndex])
 
     useEffect(() => {
-    const handleScroll = () => {
-        if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-            changeStartIndex(startIndex + 20);
-        }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-}, [startIndex]);
+        const handleScroll = () => {
+            if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+                changeStartIndex(startIndex + 20);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [startIndex]);
+    
 
 
     const [isSearched, changeIsSearched] = useState("");
     const handleSearch = useCallback((text) => {
-        if (text != "") {
+        if (text !== "") {
             changeIsSearched(text);
-            console.log(searchedArray)
-            let filteredArray = searchedArray.filter(function (obj) {
-
-                return (
-                    obj.english_title.toUpperCase().includes(text.toUpperCase())
-                );
-            }).map(function (obj) {
-                return obj;
-            });
-            if (text.length <= 3) {
-                changeSearched(filteredArray.slice(0, 5));
-            } else {
-                if (filteredArray.length > 30) {
-                    changeSearched(filteredArray.slice(0, 30));
-                } else {
-                    changeSearched(filteredArray);
-                }
-            }
+            fetch('api', {})
+                .then(response => response.json())
+                .then(data => {
+                    let filteredArray = data.filter(function (obj) {
+                        return (
+                            obj.english_title.toUpperCase().includes(text.toUpperCase())
+                        );
+                    });
+                    if (filteredArray.length > 30) {
+                        changeSearched(filteredArray.slice(0, 30));
+                    } else {
+                        changeSearched(filteredArray);
+                    }
+                })
         } else {
-            changeSearched(
-                searchedArray)
+            changeSearched(searchedArray);
             changeIsSearched("");
         }
-    },[]);
+    }, [searchedArray, changeSearched, changeIsSearched]);
+    
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 200) {
@@ -80,36 +85,10 @@ function Home() {
     return (
         <div>
             <div>
+            <Navbar handleSearch={handleSearch} />
                 <br></br>
                 <br></br>
                 <br></br>
-                <div className="">
-                    <div className="flex space-x-1">
-                        <input
-                            type="text"
-                            className="font-bold block w-full px-10 py-2 text-black-600 bg-white border rounded-full focus:border-purple-600 focus:ring-purple-600 focus:outline-none focus:ring focus:ring-opacity-40"
-                            onChange={(e) => handleSearch(e.target.value)}
-                            placeholder="Search..."
-                        />
-                        <button
-                            className="px-4 text-white bg-purple-600 rounded-full ">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-5 h-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <div id="searched">

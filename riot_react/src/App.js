@@ -1,5 +1,4 @@
 import {Route, Routes} from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import RegistrationForm from './pages/RegistrationForm';
 import LoginForm from "./pages/LoginForm"
@@ -61,9 +60,8 @@ class App extends Component {
         //     }
 
 
-        return (
-            <div className="lg:p-10  bg-zinc-900 bg-cover">
-                <Navbar/>
+        return ( 
+            <div className="lg:p-0  bg-zinc-900 bg-cover">
                 <Routes>
                     <Route path='/' element={<Home/>}/>
                     <Route path='/auth/register' element={<RegistrationForm/>}/>
