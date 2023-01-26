@@ -2,17 +2,18 @@ import MovieCard from "../components/MovieCard"
 import {useCallback, useEffect, useState} from "react";
 
 function Home() {
-    const maxLoadMovies = 200;
     const [isAtTop, changeGoToTop] = useState(false);
 
     const [searchedArray, changeSearched] = useState([false]);
+
+    const [startIndex, changeStartIndex] = useState(0);
 
 
     const movieList = async () => {
         await fetch('api', {})
             .then(response => response.json())
             .then(data => {
-                changeSearched(data)
+                changeSearched(searchedArray.concat(data.slice(startIndex, startIndex + 20)));
             })
             .then(function (response) {
                 console.log(`Fetch complete. (Not aborted)`);
@@ -20,9 +21,19 @@ function Home() {
                 console.error(` Err: ${err}`);
             });
     }
+    useEffect(()=>{
+        movieList(startIndex)
+    },[startIndex])
+
     useEffect(() => {
-        movieList()
-    }, [])
+    const handleScroll = () => {
+        if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+            changeStartIndex(startIndex + 20);
+        }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+}, [startIndex]);
 
 
     const [isSearched, changeIsSearched] = useState("");

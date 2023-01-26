@@ -48,7 +48,7 @@ class App extends Component {
 
     handleLogin() {
         notification.success({
-            message: 'Polling App',
+            message: 'Pulling App',
             description: "You're successfully logged in.",
         });
         this.loadCurrentUser();
@@ -68,7 +68,7 @@ class App extends Component {
                     <Route path='/' element={<Home/>}/>
                     <Route path='/auth/register' element={<RegistrationForm/>}/>
                     <Route path="/auth/login"
-                           element={<LoginForm onLogin={this.handleLogin} {...this.props}/>}/>}/>
+                           element={<LoginForm onLogin={this.handleLogin} {...this.props}/>}/>/
                 </Routes>
             </div>
         );

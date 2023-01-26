@@ -1,4 +1,4 @@
-const MOVIES_DATA = [
+export const MOVIES_DATA = [
 	{
 		"id": 11,
 		"tmdb_id": 240,
