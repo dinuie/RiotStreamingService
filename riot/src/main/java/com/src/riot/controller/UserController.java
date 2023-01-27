@@ -4,11 +4,15 @@ import com.src.riot.exception.ResourceNotFoundException;
 import com.src.riot.model.Movie;
 import com.src.riot.model.User;
 import com.src.riot.payload.UserIdentityAvailability;
+import com.src.riot.payload.UserSummary;
 import com.src.riot.service.DAO.MovieRepository;
 import com.src.riot.service.DAO.UserRepository;
+import com.src.riot.service.security.CurrentUser;
+import com.src.riot.service.security.UserPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +31,12 @@ private MovieRepository movieRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-//    @GetMapping("/user/me")
-//    @PreAuthorize("hasRole('USER')")
-//    public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-//        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
-//        return userSummary;
-//    }
+    @GetMapping("/watch")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
+        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+        return userSummary;
+    }
 
     @GetMapping("/user/checkUsernameAvailability")
     public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
