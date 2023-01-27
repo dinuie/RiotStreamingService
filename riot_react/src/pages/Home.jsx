@@ -21,7 +21,7 @@ function Home() {
             await fetch(`api?startIndex=${startIndex}`)
                 .then(response => response.json())
                 .then(data => {
-                    changeSearched(searchedArray.concat(data.slice(startIndex, startIndex + 20)));
+                    changeSearched(searchedArray.concat(data.slice(startIndex, startIndex + 30)));
                 })
                 .catch(function (err) {
                     console.error(` Err: ${err}`);
