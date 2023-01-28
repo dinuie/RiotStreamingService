@@ -3,10 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 function MovieCard({id, enName, year, imbd, time, img}) {
-  // const handleChosenMovie = (id)=>{
-  //   localStorage.setItem('movieData',JSON.stringify({idMovie:id,atWatch:0}));
-  // }
-  console.log(id);
   return (
     <div
       className="static m-5 p-1 w-auto rounded-xl bg-violet-600 bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g "

@@ -16,40 +16,6 @@ import ApiUtils, {login} from '../util/ApiUtils';
 import {ACCESS_TOKEN} from '../constants';
 import {notification} from "antd";
 import {Link} from "react-router-dom";
-// import classes from "*.module.css";
-// import classes from "*.module.css";
-
-// import {Form, Input,Button, notification} from 'antd';
-// import Icon from "antd/es/icon";
-
-// const FormItem = Form.Item;
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         height: '100vh',
-//     },
-//     image: {
-//         backgroundImage: 'url(https://source.unsplash.com/random)',
-//         backgroundSize: 'cover',
-//     },
-//     paper: {
-//         margin: theme.spacing(8, 4),
-//         display: 'flex',
-//         flexDirection: 'column',
-//         alignItems: 'center',
-//     },
-//     avatar: {
-//         margin: theme.spacing(1),
-//         backgroundColor: theme.palette.secondary.main,
-//     },
-//     form: {
-//         width: '100%',
-//         marginTop: theme.spacing(1),
-//     },
-//     submit: {
-//         margin: theme.spacing(3, 0, 2),
-//     },
-// }));
 
 export default function LoginForm() {
     // const classes = useStyles();
