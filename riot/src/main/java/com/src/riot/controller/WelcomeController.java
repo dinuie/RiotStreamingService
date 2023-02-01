@@ -36,28 +36,11 @@ public class WelcomeController {
         return userService.userLoginEmail(email);
 
     }
+
     @GetMapping
     public List<Movie> movieList() {
         return movieService.movieList();
     }
-
-//    @PostMapping("/login")
-//    public ResponseEntity<String> login(@RequestBody User user){
-//
-//    }
-//
-//    @PostMapping("/Register")
-//    private ResponseEntity<String> registration(@RequestBody User user){
-//
-//    }
-
 }
-
-//    @PostMapping("/register")
-//
-//    public void createUser(@RequestBody User user) {
-//        userService.createNewUser(user);
-//    }
-//
 
 
