@@ -13,7 +13,7 @@ function MovieCard({id, enName, year, imbd, time, img}) {
         className={" w-full rounded-xl bg-cover "}
         style={{height:"100%"}}
         alt={enName}
-        src={"http://image.tmdb.org/t/p/w500"+img} />
+        src={"https://image.tmdb.org/t/p/w500"+img} />
       </Link>
       <div className="clear-both" />
       <p className="float-left pl-1 pt-1 text-yellow-50 font-semibold font-sans text-l">
