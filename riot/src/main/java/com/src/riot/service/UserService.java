@@ -1,6 +1,7 @@
 package com.src.riot.service;
 
 import com.src.riot.model.User;
+import com.src.riot.service.DAO.MovieRepository;
 import com.src.riot.service.DAO.RoleRepository;
 import com.src.riot.service.DAO.UserRepository;
 
@@ -11,13 +12,9 @@ import java.util.List;
 
 @Service("userService")
 @Transactional
-public class UserService  {
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+public class UserService extends BaseService {
+    public UserService(UserRepository userRepository, MovieRepository movieRepository, RoleRepository roleRepository) {
+        super(userRepository, movieRepository, roleRepository);
     }
 
 
@@ -43,4 +40,11 @@ public class UserService  {
         userRepository.deleteById(userId);
     }
 
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 }
