@@ -12,19 +12,24 @@ function Home() {
   const movieList = async (searchText) => {
     try {
       let response;
-      if (searchText) {
-        response = await fetch(`api?title=${searchText}`);
-      } else {
-        response = await fetch(`api?startIndex=${startIndex}`);
+      const endpoint = searchText
+        ? `api?title=${searchText}`
+        : `api?startIndex=${startIndex}`;
+      response = await fetch(endpoint);
+
+      if (!response.ok) {
+        throw new Error(
+          `Error: Failed to load resource: the server responded with a status of ${response.status}`
+        );
       }
       const data = await response.json();
       setSearchedArray(
         searchText
           ? data
-          : searchedArray.concat(data.slice(startIndex, startIndex + 25))
+          : searchedArray.concat(data.slice(startIndex, startIndex + 20))
       );
     } catch (err) {
-      console.error(`Error: ${err}`);
+      console.error(err);
     }
   };
 
@@ -52,18 +57,19 @@ function Home() {
         if (text !== "") {
           changeIsSearched(text);
           try {
-            const response = await fetch("api");
+            const response = await fetch(`api?title=${text}`);
+            if (!response.ok) {
+              throw new Error(
+                `Error: Failed to load resource: the server responded with a status of ${response.status}`
+              );
+            }
             const data = await response.json();
             let filteredArray = data.filter(function (obj) {
               return obj.english_title
                 .toLowerCase()
                 .includes(text.toLowerCase());
             });
-            if (filteredArray.length > 30) {
-              setSearchedArray(filteredArray.slice(0, 30));
-            } else {
-              setSearchedArray(filteredArray);
-            }
+            setSearchedArray(filteredArray);
           } catch (err) {
             console.error(`Error: ${err}`);
           }
@@ -83,6 +89,7 @@ function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <div className="relative bg-gray-900">
       <div>
@@ -103,9 +110,9 @@ function Home() {
         <div
           className={`md:grid md:grid-cols-3 md:gap-3 ${
             searchedArray.length ? "" : "hidden"
-          }`}   
+          }`}
         >
-          {searchedArray.length > 0 && (typeof searchedArray !== "undefined") ? (
+          {searchedArray.length > 0 ? (
             searchedArray.map((e, i) => {
               return (
                 <MovieCard
