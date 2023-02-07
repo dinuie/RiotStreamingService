@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -58,6 +60,10 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
 
 
     @Bean
@@ -71,7 +77,8 @@ public class SecurityConfig {
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .invalidSessionUrl("/login").and()
+                .invalidSessionUrl("/login") .maximumSessions(1).sessionRegistry(sessionRegistry()).and()
+                .sessionFixation().newSession().and()
                 .authorizeRequests()
                 .requestMatchers("/**").permitAll()
                 .requestMatchers("/api/auth/**")

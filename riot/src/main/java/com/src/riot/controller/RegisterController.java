@@ -38,6 +38,8 @@ public class RegisterController {
     @Autowired
     private UserService userService;
     @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
     private JwtTokenProvider tokenProvider;
 
     @PostMapping("/login")
@@ -60,7 +62,7 @@ public class RegisterController {
         }
         User user = new User(signUpRequest.getUsername(), signUpRequest.getUserDateOfBirth(),
                 signUpRequest.getEmail(), signUpRequest.getPassword(), RoleName.ROLE_USER);
-
+        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         User result = userService.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api")
