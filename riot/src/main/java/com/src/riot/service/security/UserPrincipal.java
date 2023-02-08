@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
     private Long id;
@@ -35,9 +36,9 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities =
-                Collections.singletonList(new SimpleGrantedAuthority(user.getRoles().name()));
-
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
+                new SimpleGrantedAuthority(role.getName().name())
+        ).collect(Collectors.toList());
         return new UserPrincipal(
                 user.getId(),
                 user.getUsername(),

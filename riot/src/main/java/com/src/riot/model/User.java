@@ -9,6 +9,9 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -37,21 +40,24 @@ public class User {
     @NotBlank
     @Size(max = 4000)
     private String userPassword;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
 
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-    private RoleName roles;
+    private Set<Role> roles = new HashSet<>();
 
-    public User(String userName, String userDateOfBirth, String userEmail, String userPassword, RoleName roles) {
+
+    public User(String userName, String userDateOfBirth, String userEmail, String userPassword) {
         this.username = userName;
         this.userDateOfBirth = userDateOfBirth;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
-        this.roles = roles;
+    }
+
+    public void addRole(Role role){
+        roles.add(role);
+        role.getUserSet().add(this);
     }
 
 
