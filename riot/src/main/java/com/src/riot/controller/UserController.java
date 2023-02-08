@@ -36,7 +36,7 @@ public class UserController {
         return userSummary;
     }
 
-    @GetMapping("/watch")
+    @GetMapping("/watch/{movieId}")
     public Movie getMovieById(@RequestParam(value = "movieId") int movieId) {
         Movie movie = movieService.getMovieById(movieId);
         return movie;
