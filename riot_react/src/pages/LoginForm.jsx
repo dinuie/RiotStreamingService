@@ -42,8 +42,11 @@ export default function LoginForm() {
   };
 
   return (
-    <Grid container>
+    <Grid container justify="center" alignItems="center" className="root">
       <CssBaseline />
+      <div style={{position: 'fixed', top: 50, left: 435, right: 0, zIndex: 999}}>
+  <h1 class="text-purple-600 text-5xl font-bold cursor-pointer">RIOT STREAMING SERVICE</h1>
+</div>
       <div>
         <form noValidate onSubmit={handleSubmit}>
           <TextField
@@ -74,11 +77,13 @@ export default function LoginForm() {
             htmlType="submit"
             size="large"
             className="signup-form-button"
-            style={{backgroundColor:"white"}}
+            style={{backgroundColor:"#9932CC", color:"white", transition: "background-color 0.2s ease-in-out"}}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#9932CC"}
           >
             Sign in
           </Button>
-          <p style={{color:"#9932CC"}}>
+          <p style={{color:"#9932CC", textAlign: "center"}}>
           Don't Have an Account? <Link to="/auth/register">Register!</Link>
           </p>
         </form>

@@ -8,3 +8,7 @@
 .login-form-button {
   width: 100%;
 }
+.root {
+  background-color: #111827;
+  height: 100vh;
+}
