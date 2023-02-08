@@ -22,4 +22,5 @@ public class MovieService extends BaseService {
     public List<Movie> movieList(){
         return movieRepository.findAll();
     }
+    public Movie getMovieById(int movieId){return movieRepository.getReferenceById((long) movieId);}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("userService")
 @Transactional
@@ -35,6 +36,13 @@ public class UserService extends BaseService {
         return userRepository.userLoginPass(userPassword, userEmail);
     }
 
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public Boolean existByEmail(String email){
+        return userRepository.existsByEmail(email);
+    }
 
     public void removeUserById(Long userId) {
         userRepository.deleteById(userId);

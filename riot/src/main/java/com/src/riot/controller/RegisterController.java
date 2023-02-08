@@ -1,6 +1,8 @@
 package com.src.riot.controller;
 
 
+import com.src.riot.exception.AppException;
+import com.src.riot.model.Role;
 import com.src.riot.model.User;
 import com.src.riot.model.types.RoleName;
 import com.src.riot.payload.ApiResponse;
@@ -9,6 +11,7 @@ import com.src.riot.payload.LoginRequest;
 import com.src.riot.payload.SignUpRequest;
 import com.src.riot.service.DAO.RoleRepository;
 import com.src.riot.service.DAO.UserRepository;
+import com.src.riot.service.RoleService;
 import com.src.riot.service.UserService;
 import com.src.riot.service.security.JwtTokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
 
 
 @RestController
@@ -37,6 +41,8 @@ public class RegisterController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -50,6 +56,8 @@ public class RegisterController {
                         loginRequest.getPassword()
                 )
         );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         String jwt = tokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
@@ -60,10 +68,18 @@ public class RegisterController {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
+        if(userService.existByEmail(signUpRequest.getEmail())) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
         User user = new User(signUpRequest.getUsername(), signUpRequest.getUserDateOfBirth(),
-                signUpRequest.getEmail(), signUpRequest.getPassword(), RoleName.ROLE_USER);
+                signUpRequest.getEmail(), signUpRequest.getPassword());
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
+        Role userRole = roleService.findRoleByName(1)
+                .orElseThrow(() -> new AppException("User Role not set."));
+        user.addRole(userRole);
         User result = userService.save(user);
+
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api")
                 .buildAndExpand(result.getUsername()).toUri();
@@ -79,6 +95,7 @@ public class RegisterController {
         if (session != null) {
             session.invalidate();
         }
+        System.out.println("user logout");
         return ResponseEntity.ok("User logout success");
     }
 }

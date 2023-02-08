@@ -14,28 +14,11 @@ import java.util.List;
 public class WelcomeController {
 
     private final MovieService movieService;
-    private final UserService userService;
 
     public WelcomeController(MovieService movieService, UserService userService) {
         this.movieService = movieService;
-        this.userService = userService;
     }
 
-    @GetMapping("/users")
-    Collection<User> groups() {
-        return userService.userList();
-    }
-
-    @GetMapping("/users/{email}")
-    public User userCheckEmail(@PathVariable String email) {
-        return userService.userLoginEmail(email);
-    }
-
-    @PostMapping("/{email}")
-    public User userMainPage(@PathVariable String email) {
-        return userService.userLoginEmail(email);
-
-    }
 
     @GetMapping
     public List<Movie> movieList() {
