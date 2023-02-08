@@ -73,11 +73,10 @@ class Signup extends Component {
 
     signup(signupRequest)
       .then((response) => {
-        notification
-          .success({
-            description:
-              "Thank you! You're successfully registered. Please Login to continue!",
-          })
+        notification.success({
+          description:
+            "Thank you! You're successfully registered. Please Login to continue!",
+        });
       })
       .catch((error) => {
         notification.error({
@@ -97,7 +96,6 @@ class Signup extends Component {
       // this.state.userDateOfBirth.validateStatus === 'success'
     );
   }
-  
 
   render() {
     return (

@@ -31,7 +31,12 @@ const Navbar = (props) => {
       </div>
       <div>
         {isLoggedIn ? (
-          <button className="bg-purple-600 font-bold px-3 py-2 rounded cursor-pointer text-black" onClick={handleLogout}>Logout</button>
+          <button
+            className="bg-purple-600 font-bold px-3 py-2 rounded cursor-pointer text-black"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         ) : (
           <>
             <Link to="/auth/login">
