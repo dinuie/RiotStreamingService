@@ -68,7 +68,7 @@ export function getLogout() {
 
 export function getMovieById(id) {
   return request({
-    url: API_BASE_URL + `/watch?id=${id}`,
+    url: API_BASE_URL + `/watch?movieId=${id}`,
     method: "GET",
   });
 }
