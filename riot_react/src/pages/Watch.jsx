@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { getMovieById } from "../util/ApiUtils";
 
-function Watch() {
+const Watch = (props) => {
   const [movie, setMovie] = useState({});
-  let { id } = useParams();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`http://localhost:8080/api/${id}`);
-      const movie = await response.json();
-      setMovie(movie);
+    setLoading(true);
+    if (props.match && props.match.params && props.match.params.id) {
+      const id = props.match.params.id;
+      getMovieById(id).then((response) => {
+        setMovie(response.data);
+        setLoading(false);
+      });
     }
-    if (id) {
-      fetchData();
-    }
-  }, [id]);
+  }, [props.match.params.id]);
 
   return (
     <div>
-      <h1>{movie.enName}</h1>
-      <p>{movie.year}</p>
-      <p>{movie.imbd}</p>
-      <p>{movie.time}</p>
-      <p>{movie.img}</p>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <h2>{movie.title}</h2>
+          <p>IMDB: {movie.imdb}</p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default Watch;

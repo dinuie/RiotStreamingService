@@ -66,12 +66,11 @@ export function getLogout() {
   });
 }
 
-export function getMovieById(id) {
-  return request({
-    url: API_BASE_URL + `/watch?movieId=${id}`,
-    method: "GET",
-  });
-}
+export const getMovieById = async (id) => {
+  const response = await fetch(`http://localhost:8080/api/${id}`);
+  const movie = await response.json();
+  return movie;
+};
 
 export function getCurrentUser() {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
