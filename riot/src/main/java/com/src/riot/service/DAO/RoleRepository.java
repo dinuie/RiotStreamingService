@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+
 @Repository
-public interface RoleRepository extends
-        JpaRepository<Role, Long> {
-    @Query("SELECT name FROM Role where name=?1")
-    Optional<Role> findByName(RoleName roleName);
+public interface RoleRepository extends JpaRepository<Role, Long> {
+
+//    Optional<Role> findByName(RoleName roleName);
+
 
 }
