@@ -66,11 +66,12 @@ export function getLogout() {
   });
 }
 
-export const getMovieById = async (id) => {
-  const response = await fetch(`http://localhost:8080/api/${id}`);
-  const movie = await response.json();
-  return movie;
-};
+export function getMovieById(id) {
+  return request({
+    url: "http://localhost:8080/api/watch?movieId=" + id,
+    method: "GET",
+  });
+}
 
 export function getCurrentUser() {
   if (!localStorage.getItem(ACCESS_TOKEN)) {
