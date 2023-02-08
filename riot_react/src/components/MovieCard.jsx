@@ -18,10 +18,10 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
 
     if (localStorage.getItem(ACCESS_TOKEN)) {
       setIsLoggedIn(true);
-      getMovieById(id).then((response) => {
-        console.log(response);
-      });
-      console.log(id);
+      // getMovieById(id).then((response) => {
+      //   console.log(response);
+      // });
+      // console.log(id);
     } else {
       setIsLoggedIn(false);
     }
@@ -30,7 +30,7 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
   return (
     <div className="static m-5 p-1 w-auto rounded-xl bg-violet-600 bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g ">
       {isLoggedIn ? (
-        <Link to={`/watch?movieId=${id}`}>
+        <Link to={`/watch/${id}`}>
           {img ? (
             <img
               name="image"
