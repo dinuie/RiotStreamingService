@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RiotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RiotApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RiotApplication.class, args);
+    }
+
+
 }
