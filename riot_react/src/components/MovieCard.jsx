@@ -2,18 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import {getCurrentUser} from "../util/ApiUtils";
+import { getCurrentUser } from "../util/ApiUtils";
 
-function MovieCard({ id, enName, year, imbd, time, img, onClick }) {
+function MovieCard({ id, enName, year, imbd, time, img }) {
   if (!img || !enName || !imbd) return null;
   return (
-    <div
-      className="static m-5 p-1 w-auto rounded-xl bg-violet-600 bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g "
-      onClick={() => onClick({ id, enName, year, imbd, time, img })}
-    >
-      <Link to="/watch">
     <div className="static m-5 p-1 w-auto rounded-xl bg-violet-600 bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g ">
-      <Link to="api/watch">
+      <Link to="/Watch">
         {img ? (
           <img
             name="image"
