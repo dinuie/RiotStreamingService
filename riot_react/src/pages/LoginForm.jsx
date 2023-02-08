@@ -54,6 +54,7 @@ export default function LoginForm() {
             id="usernameOrEmail"
             name="usernameOrEmail"
             label="Email Address"
+            style={{backgroundColor:"white"}}
             onChange={(e) => setUserName(e.target.value)}
           />
           <TextField
@@ -65,6 +66,7 @@ export default function LoginForm() {
             name="password"
             label="Password"
             type="password"
+            style={{backgroundColor:"white"}}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
@@ -72,10 +74,13 @@ export default function LoginForm() {
             htmlType="submit"
             size="large"
             className="signup-form-button"
+            style={{backgroundColor:"white"}}
           >
             Sign in
           </Button>
+          <p style={{color:"#9932CC"}}>
           Don't Have an Account? <Link to="/auth/register">Register!</Link>
+          </p>
         </form>
       </div>
     </Grid>
