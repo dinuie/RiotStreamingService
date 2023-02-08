@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import "./login.css";
-import ApiUtils, { login } from "../util/ApiUtils";
+import ApiUtils, {getCurrentUser, login} from "../util/ApiUtils";
 import { ACCESS_TOKEN } from "../constants";
 import { notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ export default function LoginForm() {
       .then((response) => {
         console.log(response.json);
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+        getCurrentUser()
         navigate("/");
       })
       .catch((error) => {
