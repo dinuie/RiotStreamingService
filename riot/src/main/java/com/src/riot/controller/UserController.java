@@ -8,14 +8,14 @@ import com.src.riot.payload.UserSummary;
 import com.src.riot.service.MovieService;
 import com.src.riot.service.UserService;
 import com.src.riot.service.security.UserPrincipal;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -36,10 +36,14 @@ public class UserController {
         return userSummary;
     }
 
-    @GetMapping("/watch/{movieId}")
-    public Movie getMovieById(@RequestParam(value = "movieId") int movieId) {
-        Movie movie = movieService.getMovieById(movieId);
-        return movie;
+    @GetMapping("/watch")
+    public Optional<Movie> getMovieById(@RequestParam(value = "movieId") Long movieId) {
+        return movieService.getMovieById(movieId);
+    }
+
+    @PostMapping("/watch")
+    public Optional<Movie> getMovieId(@RequestParam(value = "movieId") Long movieId) {
+        return  movieService.getMovieById(movieId);
     }
 
     @GetMapping("/user/checkUsernameAvailability")
