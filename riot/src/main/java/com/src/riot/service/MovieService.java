@@ -7,6 +7,7 @@ import com.src.riot.service.DAO.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService extends BaseService {
@@ -22,5 +23,5 @@ public class MovieService extends BaseService {
     public List<Movie> movieList(){
         return movieRepository.findAll();
     }
-    public Movie getMovieById(int movieId){return movieRepository.getReferenceById((long) movieId);}
+    public Optional<Movie> getMovieById(Long movieId){return movieRepository.findById(movieId);}
 }
