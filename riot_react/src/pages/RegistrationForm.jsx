@@ -198,7 +198,9 @@ class Signup extends Component {
               className="signup-form-button"
               disabled={this.isFormInvalid()}
               onSubmit={this.handleSubmit}
-              style={{ backgroundColor: "#9932CC"}}
+              style={{ backgroundColor: "#9932CC", transition:"background-color 0.2s ease-in-out"}}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#9932CC"}
               >
                 Sign up
               </Button>
