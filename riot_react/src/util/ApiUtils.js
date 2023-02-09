@@ -93,7 +93,7 @@ export function getMovieGenre() {
 
 export function  getMovieByGenre(genre){
   return request({
-    url:API_BASE_URL + "/movieByGenre?genreName="+genre,
+    url:API_BASE_URL + "/movieByGenre?genreId="+genre,
     method:"GET"
   })
 }

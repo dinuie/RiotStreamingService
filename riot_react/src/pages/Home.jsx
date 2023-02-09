@@ -102,7 +102,7 @@ function Home() {
                 clearTimeout(debounceTimeoutId.current);
             }
             debounceTimeoutId.current = setTimeout(async () => {
-                if (text !== "") {
+                if (text !== null) {
                     changeIsSearched(text);
                     try {
                         const response = await fetch(`api?title=${text}`);
