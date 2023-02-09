@@ -21,7 +21,6 @@ function Home() {
     const open = Boolean(anchorElMovieGenre);
     const ITEM_HEIGHT = 48;
 
-
     const movieGenreList = async () => {
 
         getMovieGenre()
@@ -234,6 +233,7 @@ function Home() {
             </div>
         </div>
     );
+
 }
 
 export default Home;

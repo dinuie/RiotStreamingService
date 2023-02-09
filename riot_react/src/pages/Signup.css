@@ -1,7 +1,29 @@
+.outer-container{
+  width: 100%;
+  background-color: #111827;
+  text-align: center;
+}
+
 .signup-container {
-  max-width: 420px;
+  max-width: 230px;
   margin: 0 auto;
   margin-top: 40px;
+}
+
+.page-title {
+  position: relative;
+  top: -25px;
+  font-weight: bold;
+  font-size: 40px;
+  color: #9932CC;
+  background-color: #111827;
+}
+
+.signup-form .ant-form-item{
+  width: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signup-form-button {
