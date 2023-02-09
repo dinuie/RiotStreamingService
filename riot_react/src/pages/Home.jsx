@@ -1,6 +1,7 @@
 import MovieCard from "../components/MovieCard";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
+import { CircularProgress } from "@mui/material";
 
 function Home() {
   const [isAtTop, changeGoToTop] = useState(false);
@@ -8,15 +9,17 @@ function Home() {
   const [startIndex, changeStartIndex] = useState(0);
   const [isSearched, changeIsSearched] = useState("");
   const debounceTimeoutId = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const movieList = async (searchText) => {
     try {
       let response;
+      setLoading(true);
       const endpoint = searchText
         ? `api?title=${searchText}`
         : `api?startIndex=${startIndex}`;
       response = await fetch(endpoint);
-
+      setLoading(false);
       if (!response.ok) {
         throw new Error(
           `Error: Failed to load resource: the server responded with a status of ${response.status}`
@@ -99,14 +102,11 @@ function Home() {
         <br></br>
       </div>
 
-      <div id="searched" className="px-6 py-4">
-        {isSearched !== "" ? (
-          <h4 className="text-white text-center m-0 font-medium p-5 flex-col items-center">
-            You've searched: {isSearched}
-          </h4>
-        ) : (
-          ""
-        )}
+      {loading ? (
+        <div className={`flex justify-center ${loading ? "" : "hidden"}`}>
+          <CircularProgress />
+        </div>
+      ) : (
         <div
           className={`md:grid md:grid-cols-3 md:gap-3 ${
             searchedArray.length ? "" : "hidden"
@@ -133,6 +133,17 @@ function Home() {
             </h4>
           )}
         </div>
+      )}
+
+      <div id="searched" className="px-6 py-4">
+        {isSearched !== "" ? (
+          <h4 className="text-white text-center m-0 font-medium p-5 flex-col items-center">
+            You've searched: {isSearched}
+          </h4>
+        ) : (
+          ""
+        )}
+
         <button
           className={`bg-slate-50 rounded-full p-2 pl-2 pr-2 text-black font-bold text-center ${
             isAtTop ? "" : "hidden"
