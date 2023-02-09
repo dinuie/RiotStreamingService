@@ -1,6 +1,7 @@
 package com.src.riot.service;
 
 import com.src.riot.model.User;
+import com.src.riot.service.DAO.MovieGenreRepository;
 import com.src.riot.service.DAO.MovieRepository;
 import com.src.riot.service.DAO.RoleRepository;
 import com.src.riot.service.DAO.UserRepository;
@@ -14,8 +15,8 @@ import java.util.Optional;
 @Service("userService")
 @Transactional
 public class UserService extends BaseService {
-    public UserService(UserRepository userRepository, MovieRepository movieRepository, RoleRepository roleRepository) {
-        super(userRepository, movieRepository, roleRepository);
+    public UserService(UserRepository userRepository, MovieRepository movieRepository, RoleRepository roleRepository, MovieGenreRepository movieGenreRepository) {
+        super(userRepository, movieRepository, roleRepository, movieGenreRepository);
     }
 
 

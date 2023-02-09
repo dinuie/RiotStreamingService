@@ -9,7 +9,9 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,8 +46,8 @@ public class User {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-
     private Set<Role> roles = new HashSet<>();
+
 
 
     public User(String userName, String userDateOfBirth, String userEmail, String userPassword) {
