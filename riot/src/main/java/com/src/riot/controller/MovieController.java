@@ -27,7 +27,6 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<String> addNewFilm(@RequestBody List<Movie> movie) {
-//        Set<MovieGenre> movieGenre=movie
         for (Movie oneMovie : movie) {
             movieService.saveNewMovie(oneMovie);
         }

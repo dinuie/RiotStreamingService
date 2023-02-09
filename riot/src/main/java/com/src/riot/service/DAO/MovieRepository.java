@@ -10,7 +10,5 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-//    Query()
-//    MovieGenre getMoviesGenreByMovieId(Long movieGenreId,Long movieId);
 
 }

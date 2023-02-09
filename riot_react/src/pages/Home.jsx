@@ -16,10 +16,8 @@ function Home() {
     const debounceTimeoutId = useRef(null);
     const [loading, setLoading] = useState(false);
     const [movieGenre, setMovieGenre] = useState([false])
-    const [movieSorted,setMovieSort]=useState(false);
     const [anchorElMovieGenre, setAnchorElMovieGenre] = useState(null);
     const open = Boolean(anchorElMovieGenre);
-    const ITEM_HEIGHT = 48;
 
     const movieGenreList = async () => {
 
@@ -52,7 +50,6 @@ function Home() {
         }
 
         setSearchedArray(filteredArray);
-        setMovieSort(true);
         setAnchorElMovieGenre(null);
     };
     const movieList = async (searchText) => {
@@ -146,7 +143,7 @@ function Home() {
                 <br></br>
             </div>
 
-            <div>
+            <div >
                 <Button
                     id="demo-customized-button"
                     aria-controls={open ? 'demo-customized-menu' : undefined}

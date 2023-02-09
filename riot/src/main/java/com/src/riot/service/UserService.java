@@ -19,12 +19,6 @@ public class UserService extends BaseService {
         super(userRepository, movieRepository, roleRepository, movieGenreRepository);
     }
 
-
-//    public User createNewUser(User user) {
-//        User newUser = userRepository.createUser(user);
-//        return newUser;
-//    }
-
     public List<User> userList() {
         return userRepository.findAll();
     }
