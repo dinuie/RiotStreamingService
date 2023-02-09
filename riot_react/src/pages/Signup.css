@@ -10,6 +10,15 @@
   margin-top: 40px;
 }
 
+.page-title {
+  position: relative;
+  top: -25px;
+  font-weight: bold;
+  font-size: 40px;
+  color: #9932CC;
+  background-color: #111827;
+}
+
 .signup-form-button {
   width: 100%;
   margin-top: 15px;

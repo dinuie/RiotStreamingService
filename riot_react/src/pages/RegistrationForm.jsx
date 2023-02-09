@@ -101,7 +101,7 @@ class Signup extends Component {
     return (
       <div className="outer-container">
       <div className="signup-container" style={{ backgroundColor: "#111827" }}>
-        <h1 className="page-title" style={{color:"#9932CC", backgroundColor: "#111827"}}>Sign Up</h1>
+        <h1 className="page-title">Sign Up</h1>
         <div className="signup-content" >
           <form onSubmit={this.handleSubmit} className="signup-form">
             <FormItem
