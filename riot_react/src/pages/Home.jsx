@@ -80,7 +80,7 @@ function Home() {
           setSearchedArray([]);
           changeIsSearched("");
         }
-      }, 100);
+      }, 200);
     },
     [changeIsSearched, setSearchedArray]
   );

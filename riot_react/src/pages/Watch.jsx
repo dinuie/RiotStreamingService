@@ -4,7 +4,7 @@ import { getMovieById } from "../util/ApiUtils";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Sv2 from "../components/TorServer";
+import TorServer from "../components/TorServer";
 
 const Watch = (props) => {
   const [movie, setMovie] = useState({});
@@ -55,7 +55,7 @@ const Watch = (props) => {
         </div>
       </div>
       <div>
-        <Sv2
+        <TorServer
           movieId={id}
           hash={movie?.hash}
           backdrop_path={movie?.backdrop_path}
