@@ -1,5 +1,6 @@
 package com.src.riot.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +9,9 @@ import lombok.NoArgsConstructor;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -34,6 +37,12 @@ public class Movie {
     private List<Integer> genre_ids;
     private String hash;
     private String update;
+    @JsonBackReference
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "movie_genre_ids",
+            joinColumns = @JoinColumn(name = "genre_ids"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private Set<MovieGenre> movieGenreSet = new HashSet<>();
 
 
 
