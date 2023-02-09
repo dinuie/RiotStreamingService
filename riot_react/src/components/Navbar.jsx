@@ -56,9 +56,9 @@ const Navbar = (props) => {
         {isLoggedIn ? (
           <Toolbar>
             {isLoggedIn && (
-              <div className="bg-purple-600 rounded-2xl">
+              <div className="bg-purple-600 rounded-2xl hover:bg-purple-500 hover:text-black">
                 <IconButton
-                  size="inherit"
+                  size="small"
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
