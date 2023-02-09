@@ -14,21 +14,15 @@ import java.util.Set;
 public class WelcomeController {
 
     private final MovieService movieService;
-    private final MovieGenreService movieGenreService;
 
-    public WelcomeController(MovieService movieService, MovieGenreService movieGenreService) {
+    public WelcomeController(MovieService movieService) {
         this.movieService = movieService;
-        this.movieGenreService = movieGenreService;
+
     }
-
-
     @GetMapping
     public List<Movie> movieList() {
         return movieService.movieList();
     }
-
-
-
 }
 
 

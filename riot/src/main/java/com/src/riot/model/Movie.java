@@ -38,14 +38,6 @@ public class Movie {
     private List<Integer> genre_ids;
     private String hash;
     private String update;
-//    @JsonManagedReference
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(name = "movie_genre_ids",
-//            joinColumns = @JoinColumn(name = "movie_id"),
-//            inverseJoinColumns = @JoinColumn(name = "enre_ids"))
-//    private Set<MovieGenre> movieGenreSet = new HashSet<>();
-
-
-
 
 }
+

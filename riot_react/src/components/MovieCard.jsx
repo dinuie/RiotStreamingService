@@ -2,26 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { getCurrentUser, getMovieById } from "../util/ApiUtils";
 import { ACCESS_TOKEN } from "../constants";
 
 function MovieCard({ id, enName, year, imbd, time, img }) {
   if (!img || !enName || !imbd) return null;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // let match = useMatch ({url:"/watch"});
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    console.log("intra in movie page");
-
-    if (localStorage.getItem(ACCESS_TOKEN)) {
+      if (localStorage.getItem(ACCESS_TOKEN)) {
       setIsLoggedIn(true);
-      // getMovieById(id).then((response) => {
-      //   console.log(response);
-      // });
-      // console.log(id);
     } else {
       setIsLoggedIn(false);
     }

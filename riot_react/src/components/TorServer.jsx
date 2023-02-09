@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import {getMovieById} from "../util/ApiUtils";
 
 const TorServer = ({ movieId, hash, backdrop_path }) => {
   const [movieObject, setMovieObject] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/watch?movieId=${movieId}`)
+    getMovieById(movieId)
       .then((response) => response.json())
       .then((data) => {
         setMovieObject(data);

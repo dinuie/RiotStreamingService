@@ -48,8 +48,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-
-
     public User(String userName, String userDateOfBirth, String userEmail, String userPassword) {
         this.username = userName;
         this.userDateOfBirth = userDateOfBirth;
@@ -61,19 +59,5 @@ public class User {
         roles.add(role);
         role.getUserSet().add(this);
     }
-
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-//        User user = (User) o;
-//        return id != null && Objects.equals(id, user.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return getClass().hashCode();
-//    }
 
 }

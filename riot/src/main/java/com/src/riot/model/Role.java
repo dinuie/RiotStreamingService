@@ -29,11 +29,6 @@ public class Role {
 
     }
 
-    public void addUser(User user){
-        userSet.add(user);
-        user.getRoles().add(this);
-    }
-
     public Role(RoleName name) {
         this.name = name;
     }
