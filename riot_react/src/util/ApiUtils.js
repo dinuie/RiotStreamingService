@@ -84,6 +84,20 @@ export function getCurrentUser() {
   });
 }
 
+export function getMovieGenre() {
+  return request({
+    url:API_BASE_URL+"/movieGenre",
+    method: "GET"
+  })
+}
+
+export function  getMovieByGenre(genre){
+  return request({
+    url:API_BASE_URL + "/movieByGenre?genreId="+genre,
+    method:"GET"
+  })
+}
+
 export function getUserProfile(username) {
   return request({
     url: "/users/" + username,

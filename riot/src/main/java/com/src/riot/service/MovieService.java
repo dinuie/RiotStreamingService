@@ -1,6 +1,7 @@
 package com.src.riot.service;
 
 import com.src.riot.model.Movie;
+import com.src.riot.service.DAO.MovieGenreRepository;
 import com.src.riot.service.DAO.MovieRepository;
 import com.src.riot.service.DAO.RoleRepository;
 import com.src.riot.service.DAO.UserRepository;
@@ -11,10 +12,11 @@ import java.util.Optional;
 
 @Service
 public class MovieService extends BaseService {
-    public MovieService(UserRepository userRepository, MovieRepository movieRepository, RoleRepository roleRepository) {
-        super(userRepository, movieRepository, roleRepository);
-    }
 
+
+    public MovieService(UserRepository userRepository, MovieRepository movieRepository, RoleRepository roleRepository, MovieGenreRepository movieGenreRepository) {
+        super(userRepository, movieRepository, roleRepository, movieGenreRepository);
+    }
 
     public void saveNewMovie(Movie movie){
         movieRepository.save(movie);

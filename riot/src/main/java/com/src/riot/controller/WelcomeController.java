@@ -1,22 +1,24 @@
 package com.src.riot.controller;
 
 import com.src.riot.model.Movie;
-import com.src.riot.model.User;
+import com.src.riot.model.MovieGenre;
+import com.src.riot.service.MovieGenreService;
 import com.src.riot.service.MovieService;
-import com.src.riot.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
 public class WelcomeController {
 
     private final MovieService movieService;
+    private final MovieGenreService movieGenreService;
 
-    public WelcomeController(MovieService movieService, UserService userService) {
+    public WelcomeController(MovieService movieService, MovieGenreService movieGenreService) {
         this.movieService = movieService;
+        this.movieGenreService = movieGenreService;
     }
 
 
@@ -24,6 +26,9 @@ public class WelcomeController {
     public List<Movie> movieList() {
         return movieService.movieList();
     }
+
+
+
 }
 
 
