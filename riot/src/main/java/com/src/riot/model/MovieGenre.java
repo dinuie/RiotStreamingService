@@ -21,7 +21,12 @@ public class MovieGenre {
     @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "movie_genre_ids",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_ids"))
+            joinColumns = @JoinColumn(name = "genre_ids"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Movie> moviesSet = new HashSet<>();
+//    public void addMovie(Movie movie){
+//        moviesSet.add(movie);
+//        movie.getMovieGenreSet().add(this);
+//    }
+
 }

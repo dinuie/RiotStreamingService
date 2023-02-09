@@ -1,6 +1,7 @@
 package com.src.riot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,12 +38,12 @@ public class Movie {
     private List<Integer> genre_ids;
     private String hash;
     private String update;
-    @JsonBackReference
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "movie_genre_ids",
-            joinColumns = @JoinColumn(name = "genre_ids"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<MovieGenre> movieGenreSet = new HashSet<>();
+//    @JsonManagedReference
+//    @ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(name = "movie_genre_ids",
+//            joinColumns = @JoinColumn(name = "movie_id"),
+//            inverseJoinColumns = @JoinColumn(name = "enre_ids"))
+//    private Set<MovieGenre> movieGenreSet = new HashSet<>();
 
 
 

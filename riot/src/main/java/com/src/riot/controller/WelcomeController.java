@@ -27,15 +27,7 @@ public class WelcomeController {
         return movieService.movieList();
     }
 
-    @GetMapping("/movieGenre")
-    public List<MovieGenre> movieGenreList() {
-        return movieGenreService.movieGenreList();
-    }
 
-    @GetMapping("/movieByGenre")
-    public Set<Movie> getMovieByGenre(@RequestParam(value = "genreName") Long genreId) {
-        return movieGenreService.getMovieByGenreId(genreId);
-    }
 
 }
 

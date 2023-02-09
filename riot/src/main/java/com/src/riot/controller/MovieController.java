@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/movie")
@@ -26,6 +27,7 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<String> addNewFilm(@RequestBody List<Movie> movie) {
+//        Set<MovieGenre> movieGenre=movie
         for (Movie oneMovie : movie) {
             movieService.saveNewMovie(oneMovie);
         }

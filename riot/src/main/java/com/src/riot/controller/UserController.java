@@ -2,9 +2,11 @@ package com.src.riot.controller;
 
 import com.src.riot.exception.ResourceNotFoundException;
 import com.src.riot.model.Movie;
+import com.src.riot.model.MovieGenre;
 import com.src.riot.model.User;
 import com.src.riot.payload.UserIdentityAvailability;
 import com.src.riot.payload.UserSummary;
+import com.src.riot.service.MovieGenreService;
 import com.src.riot.service.MovieService;
 import com.src.riot.service.UserService;
 import com.src.riot.service.security.UserPrincipal;
@@ -15,7 +17,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -25,6 +29,8 @@ public class UserController {
     UserService userService;
     @Autowired
     MovieService movieService;
+    @Autowired
+    MovieGenreService movieGenreService;
 
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -36,6 +42,16 @@ public class UserController {
         return userSummary;
     }
 
+    @GetMapping("/movieGenre")
+    public List<MovieGenre> movieGenreList() {
+        return movieGenreService.movieGenreList();
+    }
+
+    @GetMapping("/movieByGenre")
+    public Set<Movie> getMovieByGenre(@RequestParam(value = "genreId") Long genreId) {
+        return movieGenreService.getMovieByGenreId(genreId);
+    }
+
     @GetMapping("/watch")
     public Optional<Movie> getMovieById(@RequestParam(value = "movieId") Long movieId) {
         return movieService.getMovieById(movieId);
@@ -43,7 +59,7 @@ public class UserController {
 
     @PostMapping("/watch")
     public Optional<Movie> getMovieId(@RequestParam(value = "movieId") Long movieId) {
-        return  movieService.getMovieById(movieId);
+        return movieService.getMovieById(movieId);
     }
 
     @GetMapping("/user/checkUsernameAvailability")
