@@ -1,5 +1,11 @@
+.outer-container{
+  width: 100%;
+  background-color: #111827;
+  text-align: center;
+}
+
 .signup-container {
-  max-width: 420px;
+  max-width: 500px;
   margin: 0 auto;
   margin-top: 40px;
 }

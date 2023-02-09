@@ -99,9 +99,10 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="signup-container">
-        <h1 className="page-title" style={{color:"#9932CC"}}>Sign Up</h1>
-        <div className="signup-content">
+      <div className="outer-container">
+      <div className="signup-container" style={{ backgroundColor: "#111827" }}>
+        <h1 className="page-title" style={{color:"#9932CC", backgroundColor: "#111827"}}>Sign Up</h1>
+        <div className="signup-content" >
           <form onSubmit={this.handleSubmit} className="signup-form">
             <FormItem
               label={<span style={{color: "#9932CC"}}>Full Name</span>}
@@ -153,7 +154,7 @@ class Signup extends Component {
               />
             </FormItem>
             <FormItem
-              label="Email"
+              label={<span style={{color: "#9932CC"}}>Email</span>}
               hasFeedback
               validateStatus={this.state.email.validateStatus}
               help={this.state.email.errorMsg}
@@ -172,7 +173,7 @@ class Signup extends Component {
               />
             </FormItem>
             <FormItem
-              label="Password"
+              label={<span style={{color: "#9932CC"}}>Password</span>}
               validateStatus={this.state.password.validateStatus}
               help={this.state.password.errorMsg}
             >
@@ -197,14 +198,15 @@ class Signup extends Component {
               className="signup-form-button"
               disabled={this.isFormInvalid()}
               onSubmit={this.handleSubmit}
-              style={{ backgroundColor: "#9932CC" }}
+              style={{ backgroundColor: "#9932CC"}}
               >
                 Sign up
               </Button>
-              Already registed? <Link to="/auth/login">Login now!</Link>
+              <span style={{color: "#9932CC"}}>Already registered? <Link to="/auth/login" style={{color:"#9932CC"}}>Login now!</Link></span>
             </FormItem>
           </form>
         </div>
+      </div>
       </div>
     );
   }
