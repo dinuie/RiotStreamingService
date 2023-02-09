@@ -1,7 +1,7 @@
 import MovieCard from "../components/MovieCard";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
-import { CircularProgress } from "@mui/material";
+// import { CircularProgress } from "@mui/material";
 
 function Home() {
   const [isAtTop, changeGoToTop] = useState(false);
@@ -9,17 +9,17 @@ function Home() {
   const [startIndex, changeStartIndex] = useState(0);
   const [isSearched, changeIsSearched] = useState("");
   const debounceTimeoutId = useRef(null);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(true);
 
   const movieList = async (searchText) => {
     try {
       let response;
-      setLoading(true);
+      // setLoading(true);
       const endpoint = searchText
         ? `api?title=${searchText}`
         : `api?startIndex=${startIndex}`;
       response = await fetch(endpoint);
-      setLoading(false);
+      // setLoading(false);
       if (!response.ok) {
         throw new Error(
           `Error: Failed to load resource: the server responded with a status of ${response.status}`
@@ -80,7 +80,7 @@ function Home() {
           setSearchedArray([]);
           changeIsSearched("");
         }
-      }, 300);
+      }, 200);
     },
     [changeIsSearched, setSearchedArray]
   );
@@ -101,40 +101,34 @@ function Home() {
         <br></br>
         <br></br>
       </div>
-
-      {loading ? (
-        <div className={`flex justify-center ${loading ? "" : "hidden"}`}>
-          <CircularProgress />
-        </div>
-      ) : (
-        <div
-          className={`md:grid md:grid-cols-3 md:gap-3 ${
-            searchedArray.length ? "" : "hidden"
-          }`}
-        >
-          {searchedArray.length > 0 ? (
-            searchedArray.map((e, i) => {
-              return (
-                <MovieCard
-                  key={i}
-                  id={e.id}
-                  enName={e.english_title}
-                  img={e.backdrop_path}
-                  imbd={e.imdb}
-                  object={e}
-                  time={Math.floor(e.runtime / 60) + "h" + (e.runtime % 60)}
-                  year={new Date(e.release_date).getFullYear()}
-                />
-              );
-            })
-          ) : (
-            <h4 className="text-white text-center p-20 font-bold flex-col items-center">
-              No results found
-            </h4>
-          )}
-        </div>
-      )}
-
+      (
+      <div
+        className={`md:grid md:grid-cols-3 md:gap-3 ${
+          searchedArray.length ? "" : "hidden"
+        }`}
+      >
+        {searchedArray.length > 0 ? (
+          searchedArray.map((e, i) => {
+            return (
+              <MovieCard
+                key={i}
+                id={e.id}
+                enName={e.english_title}
+                img={e.backdrop_path}
+                imbd={e.imdb}
+                object={e}
+                time={Math.floor(e.runtime / 60) + "h" + (e.runtime % 60)}
+                year={new Date(e.release_date).getFullYear()}
+              />
+            );
+          })
+        ) : (
+          <h4 className="text-white text-center p-20 font-bold flex-col items-center">
+            No results found
+          </h4>
+        )}
+      </div>
+      )
       <div id="searched" className="px-6 py-4">
         {isSearched !== "" ? (
           <h4 className="text-white text-center m-0 font-medium p-5 flex-col items-center">
