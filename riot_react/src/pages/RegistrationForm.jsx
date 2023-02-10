@@ -70,9 +70,9 @@ class Signup extends Component {
       password: this.state.password.value,
     };
     console.log("ajunge in regster");
-
     signup(signupRequest)
       .then((response) => {
+
         notification.success({
           description:
             "Thank you! You're successfully registered. Please Login to continue!",

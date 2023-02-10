@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import "./login.css";
-import  {getCurrentUser, login} from "../util/ApiUtils";
+import ApiUtils, {getCurrentUser, login} from "../util/ApiUtils";
 import { ACCESS_TOKEN } from "../constants";
 import { notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
