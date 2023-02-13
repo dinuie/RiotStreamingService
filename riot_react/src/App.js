@@ -6,6 +6,7 @@ import React, {useEffect} from "react";
 import Watch from "./pages/Watch";
 import ifCurrentUser from "./components/useCurrentUser";
 import {navigate} from "@reach/router";
+import ProfilePage from "./pages/Profile";
 
 function App() {
     const isLoggedIn = ifCurrentUser();
@@ -19,6 +20,7 @@ function App() {
             {isLoggedIn ? (<Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/watch/:id" element={<Watch/>}/>
+                <Route path="/profile" element={<ProfilePage/>}/>
             </Routes>) : (<>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
