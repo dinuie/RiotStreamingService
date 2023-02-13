@@ -45,7 +45,7 @@ const Navbar = (props) => {
   return (
     <div className="flex items-center justify-between p-4 z-[100] w-full absolute">
       <Link to="/">
-        <h1 className="text-purple-600 text-3xl font-bold cursor-pointer">
+        <h1 className="text-purple-600 hover:text-pink-500 font-sans font-semibold text-3xl">
           RIOT STREAMING SERVICE
         </h1>
       </Link>
@@ -56,9 +56,8 @@ const Navbar = (props) => {
         {isLoggedIn ? (
           <Toolbar>
             {isLoggedIn && (
-              <div className="bg-purple-600 rounded-2xl hover:bg-purple-500 hover:text-black">
+              <div className="rounded-full text-black  ml-7 mb-0 mt-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 px-1.5 py-1.5 text-center mr-2">
                 <IconButton
-                  size="small"
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"

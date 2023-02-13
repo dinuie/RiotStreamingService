@@ -6,7 +6,6 @@ import React from "react";
 import Watch from "./pages/Watch";
 
 function App() {
-
   return (
     <div className="lg:p-0  bg-zinc-900 bg-cover">
       <Routes>

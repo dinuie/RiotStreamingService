@@ -7,8 +7,21 @@ import { getMovieByGenre, getMovieGenre } from "../util/ApiUtils";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Button from "@mui/material/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import CarouselContainer from "../components/CarouselContainer";
+
+const useStyles = makeStyles((theme) => ({
+  genreMenu: {
+    backgroundColor: "black !important",
+    color: "white !important",
+    marginTop: "45px",
+    marginLeft: "1px",
+    overflow: "hidden! important ",
+  },
+}));
 
 function Home() {
+  const classes = useStyles();
   const [isAtTop, changeGoToTop] = useState(false);
   const [searchedArray, setSearchedArray] = useState([false]);
   const [startIndex, changeStartIndex] = useState(0);
@@ -36,9 +49,10 @@ function Home() {
     console.log("genurile de film");
   }, []);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (event) => {
     setAnchorElMovieGenre(event.currentTarget);
   };
+
   const handleClose = async (item) => {
     setSearchedArray([]);
 
@@ -147,11 +161,9 @@ function Home() {
           aria-controls={open ? "demo-customized-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
-          variant="contained"
-          disableElevation
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
-          class="bg-black hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-2xl ml-6 mt-2"
+          class="text-black font-sans ml-7 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
         >
           GENRE
         </Button>
@@ -162,6 +174,9 @@ function Home() {
           }}
           anchorEl={anchorElMovieGenre}
           open={open}
+          classes={{
+            paper: classes.genreMenu,
+          }}
           onClose={handleClose}
         >
           {movieGenre.map((option, i) => (
@@ -176,7 +191,6 @@ function Home() {
           {/*</Menu>*/}
         </StyledMenu>
       </div>
-      (
       <div
         className={`md:grid md:grid-cols-3 md:gap-3 ${
           searchedArray.length ? "" : "hidden"
@@ -203,7 +217,7 @@ function Home() {
           </h4>
         )}
       </div>
-      )}
+      )
       <div id="searched" className="px-6 py-4">
         {isSearched !== "" ? (
           <h4 className="text-white text-center m-0 font-medium p-5 flex-col items-center">

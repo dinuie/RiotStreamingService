@@ -6,12 +6,12 @@ import { ACCESS_TOKEN } from "../constants";
 
 function MovieCard({ id, enName, year, imbd, time, img }) {
   if (!img || !enName || !imbd) return null;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-      if (localStorage.getItem(ACCESS_TOKEN)) {
+    if (localStorage.getItem(ACCESS_TOKEN)) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -19,7 +19,7 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
   });
 
   return (
-    <div className="static m-5 p-1 w-auto rounded-xl bg-violet-600 bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g ">
+    <div className="static m-5 w-auto rounded-2xl bg-violet-600 bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g ">
       {isLoggedIn ? (
         <Link to={`/watch/${id}`}>
           {img ? (
@@ -41,8 +41,6 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
           {img ? (
             <img
               name="image"
-              className={" w-full rounded-xl bg-cover "}
-              style={{ height: "100%" }}
               alt={enName}
               src={"https://image.tmdb.org/t/p/w500" + img}
             />
@@ -54,7 +52,7 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
         </Link>
       )}
       <div className="clear-both" />
-      <p className="float-left pl-1 pt-1 text-yellow-50 font-semibold font-sans text-l">
+      <p className="pl-1 pt-1 mt-0.5 text-white font-sans text-l">
         {enName} ({year})
       </p>
       <div className="clear-both" />
