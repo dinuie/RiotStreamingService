@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { navigate } from "@reach/router";
 import SearchBox from "./Searchbox";
-import { getLogout } from "../util/ApiUtils";
+import { getCurrentUser, getLogout } from "../util/ApiUtils";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -31,6 +31,10 @@ const Navbar = (props) => {
       navigate("/");
     }
   }, [isLoggedIn, navigate]);
+  const handleProfile = () =>{
+    window.location.href = "/Profile";
+  };
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -84,7 +88,7 @@ const Navbar = (props) => {
                     paper: classes.menu,
                   }}
                 >
-                  <MenuItem onClick={handleClose}>My Profile</MenuItem>
+                  <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>
