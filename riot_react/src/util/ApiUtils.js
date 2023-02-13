@@ -97,6 +97,20 @@ export function  getMovieByGenre(genre){
     method:"GET"
   })
 }
+export function  getMovieByYearRelease(year){
+  return request({
+    url:API_BASE_URL + "/movieByYearRelease?movieByYearRelease="+year,
+    method:"GET"
+  })
+}
+export function  getYear(){
+  return request({
+    url:API_BASE_URL + "/movie/year",
+    method:"GET"
+  })
+}
+
+
 
 export function getUserProfile(username) {
   return request({
