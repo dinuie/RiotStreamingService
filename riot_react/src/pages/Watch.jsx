@@ -5,14 +5,11 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import TorServer from "../components/TorServer";
+import { Link } from "react-router-dom";
 
 const Watch = (props) => {
   const [movie, setMovie] = useState({});
   const { id } = useParams();
-
-  const handleClick = () => {
-    window.history.back();
-  };
 
   useEffect(() => {
     getMovieById(id).then((response) => {
@@ -24,12 +21,11 @@ const Watch = (props) => {
     <div className="bg-gray-900 h-screen flex items-center justify-center">
       <div className="text-white text-center p-20 font-sans">
         <div className="absolute">
-          <button
-            className="bg-black hover:bg-purple-600 hover:text-black text-purple-600 py-2 px-4 rounded"
-            onClick={handleClick}
-          >
-            <IoMdArrowRoundBack />
-          </button>
+          <Link to="/">
+            <button className="bg-black hover:bg-purple-600 hover:text-black text-purple-600 py-2 px-4 rounded">
+              <IoMdArrowRoundBack />
+            </button>
+          </Link>
         </div>
         <h2 className="font-semibold mb-5 text-xl">{movie?.english_title}</h2>
         <img
