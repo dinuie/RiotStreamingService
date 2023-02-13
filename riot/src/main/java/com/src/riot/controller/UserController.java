@@ -13,6 +13,7 @@ import com.src.riot.service.security.UserPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,17 @@ public class UserController {
     public Set<Movie> getMovieByGenre(@RequestParam(value = "genreId") Long genreId) {
         return movieGenreService.getMovieByGenreId(genreId);
     }
+
+    @GetMapping("/movieByYearRelease")
+    public List<Movie> getMovieByYear(@RequestParam(value = "movieByYearRelease") String id) {
+        return movieService.getMoviesByYearRelease(id);
+    }
+
+    @GetMapping("/movie/year")
+    public List<String> getYear(){
+    return  movieService.getYear();
+    }
+
 
     @GetMapping("/watch")
     public Optional<Movie> getMovieById(@RequestParam(value = "movieId") Long movieId) {

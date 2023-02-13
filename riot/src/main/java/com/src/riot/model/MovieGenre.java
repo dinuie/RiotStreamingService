@@ -18,7 +18,6 @@ public class MovieGenre {
     @Id
     private Long id;
     private String Name;
-    @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "movie_genre_ids",
             joinColumns = @JoinColumn(name = "genre_ids"),
