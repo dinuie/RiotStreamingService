@@ -38,12 +38,58 @@ const Navbar = (props) => {
 
   };
 
-    return (
-        <div className="flex items-center justify-between p-4 z-[100] w-full absolute">
-            <Link to="/">
-                <h1 className="text-purple-600 text-3xl font-bold cursor-pointer">
-                    RIOT STREAMING SERVICE
-                </h1>
+  return (
+    <div className="flex items-center justify-between p-4 z-[100] w-full absolute">
+      <Link to="/">
+        <h1 className="text-purple-600 hover:text-pink-500 font-sans font-semibold text-3xl">
+          RIOT STREAMING SERVICE
+        </h1>
+      </Link>
+      <div>
+        <SearchBox handleSearch={props.handleSearch} />
+      </div>
+      <div>
+        {isLoggedIn ? (
+          <Toolbar>
+            {isLoggedIn && (
+              <div className="rounded-full text-black  ml-7 mb-0 mt-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 px-1.5 py-1.5 text-center mr-2">
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  classes={{
+                    paper: classes.menu,
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>My Profile</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </div>
+            )}
+          </Toolbar>
+        ) : (
+          <>
+            <Link to="/auth/login">
+              <button className="text-white font-bold pr-4">Sign In</button>
             </Link>
             <div>
                 <SearchBox handleSearch={props.handleSearch}/>
