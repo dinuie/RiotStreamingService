@@ -43,7 +43,7 @@ class Signup extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateUsernameAvailability =
-      this.validateUsernameAvailability.bind(this);
+    this.validateUsernameAvailability.bind(this);
     this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
     this.isFormInvalid = this.isFormInvalid.bind(this);
   }

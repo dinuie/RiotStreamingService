@@ -5,6 +5,7 @@ import LoginForm from "./pages/LoginForm";
 import React, { useEffect } from "react";
 import Watch from "./pages/Watch";
 import ifCurrentUser from "./components/useCurrentUser";
+
 import { navigate } from "@reach/router";
 import Welcome from "./pages/Welcome";
 
