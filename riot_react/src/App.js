@@ -27,7 +27,7 @@ function App() {
                     <Route path="/auth/register" element={<RegistrationForm/>}/>
                     <Route path="/auth/login" element={<LoginForm/>}/>
                     <Route path="/watch/:id" element={<Watch/>}/>
-                </Routes></>)})
+                </Routes></>)}
         </div>
     )
 }
