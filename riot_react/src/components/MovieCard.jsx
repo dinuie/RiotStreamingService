@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { ACCESS_TOKEN } from "../constants";
@@ -8,6 +8,7 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
   if (!img || !enName || !imbd) return null;
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const location = useLocation();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -18,39 +19,29 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
     }
   });
 
+  const handleClick = () => {
+      localStorage.setItem("from", `/watch/${id}`);
+  };
+
+  const movieLink = isLoggedIn ? `/watch/${id}` : `/auth/login`;
+
   return (
-    <div className="static m-5 w-auto rounded-2xl bg-violet-600 bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g ">
-      {isLoggedIn ? (
-        <Link to={`/watch/${id}`}>
-          {img ? (
-            <img
-              name="image"
-              className={" w-full rounded-xl bg-cover "}
-              style={{ height: "100%" }}
-              alt={enName}
-              src={"https://image.tmdb.org/t/p/w500" + img}
-            />
-          ) : (
-            <div className="w-full rounded-xl bg-cover bg-gray-400">
-              No Image Available
-            </div>
-          )}
-        </Link>
-      ) : (
-        <Link to="/auth/login">
-          {img ? (
-            <img
-              name="image"
-              alt={enName}
-              src={"https://image.tmdb.org/t/p/w500" + img}
-            />
-          ) : (
-            <div className="w-full rounded-xl bg-cover bg-gray-400">
-              No Image Available
-            </div>
-          )}
-        </Link>
-      )}
+    <div className="static m-5 w-auto rounded-2xl bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g ">
+      <Link to={movieLink} onClick={handleClick}>
+        {img ? (
+          <img
+            name="image"
+            className={" w-full rounded-xl bg-cover "}
+            style={{ height: "100%" }}
+            alt={enName}
+            src={"https://image.tmdb.org/t/p/w500" + img}
+          />
+        ) : (
+          <div className="w-full rounded-xl bg-cover bg-gray-400">
+            No Image Available
+          </div>
+        )}
+      </Link>
       <div className="clear-both" />
       <p className="pl-1 pt-1 mt-0.5 text-white font-sans text-l">
         {enName} ({year})

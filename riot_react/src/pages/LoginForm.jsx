@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import "./login.css";
-import ApiUtils, {getCurrentUser, login} from "../util/ApiUtils";
+import ApiUtils, { getCurrentUser, login } from "../util/ApiUtils";
 import { ACCESS_TOKEN } from "../constants";
 import { notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,8 +23,8 @@ export default function LoginForm() {
       .then((response) => {
         console.log(response.json);
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-        getCurrentUser()
-        navigate("/");
+        getCurrentUser();
+        navigate(localStorage.getItem("from"));
       })
       .catch((error) => {
         if (error.status === 401) {
@@ -44,9 +44,13 @@ export default function LoginForm() {
   return (
     <Grid container justify="center" alignItems="center" className="root">
       <CssBaseline />
-      <div style={{position: 'fixed', top: 50, left: 435, right: 0, zIndex: 999}}>
-  <h1 class="text-purple-600 text-5xl font-bold cursor-pointer">RIOT STREAMING SERVICE</h1>
-</div>
+      <div
+        style={{ position: "fixed", top: 50, left: 435, right: 0, zIndex: 999 }}
+      >
+        <h1 class="text-purple-600 text-5xl font-bold cursor-pointer">
+          RIOT STREAMING SERVICE
+        </h1>
+      </div>
       <div>
         <form noValidate onSubmit={handleSubmit}>
           <TextField
@@ -57,7 +61,7 @@ export default function LoginForm() {
             id="usernameOrEmail"
             name="usernameOrEmail"
             label="Email Address"
-            style={{backgroundColor:"white"}}
+            style={{ backgroundColor: "white" }}
             onChange={(e) => setUserName(e.target.value)}
           />
           <TextField
@@ -69,7 +73,7 @@ export default function LoginForm() {
             name="password"
             label="Password"
             type="password"
-            style={{backgroundColor:"white"}}
+            style={{ backgroundColor: "white" }}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
@@ -77,14 +81,22 @@ export default function LoginForm() {
             htmlType="submit"
             size="large"
             className="signup-form-button"
-            style={{backgroundColor:"#9932CC", color:"white", transition: "background-color 0.2s ease-in-out"}}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "transparent"}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#9932CC"}
+            style={{
+              backgroundColor: "#9932CC",
+              color: "white",
+              transition: "background-color 0.2s ease-in-out",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "#9932CC")
+            }
           >
             Sign in
           </Button>
-          <p style={{color:"#9932CC", textAlign: "center"}}>
-          Don't Have an Account? <Link to="/auth/register">Register!</Link>
+          <p style={{ color: "#9932CC", textAlign: "center" }}>
+            Don't Have an Account? <Link to="/auth/register">Register!</Link>
           </p>
         </form>
       </div>

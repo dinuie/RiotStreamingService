@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {getMovieById} from "../util/ApiUtils";
+import { getMovieById } from "../util/ApiUtils";
 
 const TorServer = ({ movieId, hash, backdrop_path }) => {
   const [movieObject, setMovieObject] = useState({});
