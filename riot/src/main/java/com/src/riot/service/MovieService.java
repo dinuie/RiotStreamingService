@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class MovieService extends BaseService {
@@ -18,12 +19,20 @@ public class MovieService extends BaseService {
         super(userRepository, movieRepository, roleRepository, movieGenreRepository);
     }
 
-    public void saveNewMovie(Movie movie){
+    public void saveNewMovie(Movie movie) {
         movieRepository.save(movie);
     }
 
-    public List<Movie> movieList(){
+    public List<Movie> movieList() {
         return movieRepository.findAll();
     }
-    public Optional<Movie> getMovieById(Long movieId){return movieRepository.findById(movieId);}
+
+    public Optional<Movie> getMovieById(Long movieId) {
+        return movieRepository.findById(movieId);
+    }
+
+    public List<Movie> getMoviesByYearRelease(String id) {
+        return movieRepository.getMoviesByYear(id);
+    }
+    public List<String> getYear(){return movieRepository.getYears();}
 }
