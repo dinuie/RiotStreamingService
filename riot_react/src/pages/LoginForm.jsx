@@ -24,7 +24,12 @@ export default function LoginForm() {
         console.log(response.json);
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         getCurrentUser();
-        navigate(localStorage.getItem("from"));
+        if (localStorage.getItem("from")) {
+          navigate(localStorage.getItem("from"));
+          localStorage.removeItem("from");
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         if (error.status === 401) {
