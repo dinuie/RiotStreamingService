@@ -24,19 +24,23 @@ const ProfilePage = () => {
         console.log("Password changed");
     };
 
+    const handleSaveChanges = () =>{
+        console.log("Changes saved !");
+    }
+
     return (
         <div style={{background:`url(https://i.imgur.com/zn8ODjk.jpg) no-repeat center center fixed`, backgroundSize: "cover", backgroundColor: "#111827", color: "white", textAlign: "center", height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", fontSize: "25px"  }}>
             <h1 style={{ fontSize: "36px", marginBottom: "4rem" }}>Hello User!</h1>
             <p style={{ marginBottom: "2rem" }}>
-                Username: 
+                Username : 
                 <input type="text" value={username} onChange={handleUsernameChange} style={{ backgroundColor: "transparent", color: "white", border: "none", borderBottom: "1px solid white", textAlign: "center" }} />
             </p>
             <p style={{ marginBottom: "2rem" }}>
-                Date of Birth: 
+                Date of Birth : 
                 <input type="text" value={dateOfBirth} onChange={handleDateOfBirthChange} style={{ backgroundColor: "transparent", color: "white", border: "none", borderBottom: "1px solid white", textAlign: "center" }} />
                 </p>
             <p style={{ marginBottom: "2rem" }}>
-                email: 
+                Email :  
                 <input type="text" value={email} onChange={handleEmailChange} style={{ backgroundColor: "transparent", color: "white", border: "none", borderBottom: "1px solid white", textAlign: "center" }} />
                 </p>
             <p>
@@ -58,11 +62,17 @@ const ProfilePage = () => {
                         Change password
                     </button>
                 )}
+                <button 
+            className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center'
+            onClick={handleSaveChanges}
+        >
+            Save Changes
+        </button>
                 </p>
             <Link to="/">
                 <button
                     style={{ position: "absolute", left: "0", top: "0" }}
-                    className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center'>
+                    className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center m-5'>
                     Back to Homepage
                 </button>
             </Link>
