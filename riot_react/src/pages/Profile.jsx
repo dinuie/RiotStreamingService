@@ -25,8 +25,8 @@ const ProfilePage = () => {
     };
 
     return (
-        <div style={{ backgroundColor: "#111827", color: "white", textAlign: "center", height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", fontSize: "25px"  }}>
-            <h1 style={{ fontSize: "36px", marginBottom: "5rem" }}>Hello User!</h1>
+        <div style={{background:`url(https://i.imgur.com/zn8ODjk.jpg) no-repeat center center fixed`, backgroundSize: "cover", backgroundColor: "#111827", color: "white", textAlign: "center", height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", fontSize: "25px"  }}>
+            <h1 style={{ fontSize: "36px", marginBottom: "4rem" }}>Hello User!</h1>
             <p style={{ marginBottom: "2rem" }}>
                 Username: 
                 <input type="text" value={username} onChange={handleUsernameChange} style={{ backgroundColor: "transparent", color: "white", border: "none", borderBottom: "1px solid white", textAlign: "center" }} />
