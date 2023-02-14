@@ -8,6 +8,7 @@ import ifCurrentUser from "./components/useCurrentUser";
 
 import { navigate } from "@reach/router";
 import Welcome from "./pages/Welcome";
+import ProfilePage from "./pages/Profile";
 
 function App() {
   const isLoggedIn = ifCurrentUser();
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/watch/:id" element={<Watch />} />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/profile" element={<ProfilePage/>}/>
         </Routes>
       ) : (
         <>
