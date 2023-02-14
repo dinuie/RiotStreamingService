@@ -50,7 +50,7 @@ export default function LoginForm() {
     <Grid container justify="center" alignItems="center" className="root">
       <CssBaseline />
       <div
-        style={{ position: "fixed", top: 50, left: 435, right: 0, zIndex: 999 }}
+        style={{position: "fixed", top: 50, left: 435, right: 0, zIndex: 999 }}
       >
         <h1 class="text-purple-600 text-5xl font-bold cursor-pointer">
           RIOT STREAMING SERVICE
