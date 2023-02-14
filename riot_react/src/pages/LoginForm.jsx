@@ -28,7 +28,7 @@ export default function LoginForm() {
           navigate(localStorage.getItem("from"));
           localStorage.removeItem("from");
         } else {
-          navigate("/");
+          navigate("/home");
         }
       })
       .catch((error) => {
