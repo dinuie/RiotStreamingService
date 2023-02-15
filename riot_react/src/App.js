@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 
 import { navigate } from "@reach/router";
 import Welcome from "./pages/Welcome";
+import ProfilePage from "./pages/Profile";
 
 function App() {
   const isLoggedIn = ifCurrentUser();
@@ -29,6 +30,12 @@ function App() {
             <Route path="/watch/:id" element={<Watch />} />
           </Routes>
         </Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/watch/:id" element={<Watch />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/profile" element={<ProfilePage/>}/>
+        </Routes>
       ) : (
         <>
           <Routes>
