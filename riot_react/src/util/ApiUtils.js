@@ -127,7 +127,7 @@ export function removeFavoriteMovie(userId, movieId) {
     })
 }
 
-export function getFavoriteFilm(userId) {
+export function getFavoriteMovie(userId) {
     return request({
         url: API_BASE_URL + "/favorites?userId=" + userId,
         method: "GET"

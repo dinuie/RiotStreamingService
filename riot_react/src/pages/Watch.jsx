@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import SimilarMovies from "../components/SimilarMovies";
+import MenuItem from "@mui/material/MenuItem";
 
 const Watch = (props) => {
   const [movieGenre, setMovieGenre] = useState([false]);
@@ -76,11 +77,14 @@ const Watch = (props) => {
                 "m"}
             </h2>
             <h2>
-              Genres:{" "}
-              {movieGenre.map((option, i) => {
-                <h2 key={i}>{option.name}</h2>;
-                console.log(option);
-              })}
+              Genres:
+              {movieGenre.map((option, i) => (
+                  <h2
+                      key={i}
+                  >
+                    {option.name}
+                  </h2>
+              ))}
             </h2>
           </div>
         </div>

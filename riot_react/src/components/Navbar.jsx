@@ -29,7 +29,7 @@ const Navbar = (props) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+        // navigate("/");
     }
   }, [isLoggedIn, navigate]);
   const handleProfile = () =>{

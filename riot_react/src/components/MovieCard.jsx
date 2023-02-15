@@ -6,7 +6,7 @@ import {ACCESS_TOKEN} from "../constants";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {addFavoriteMovie, getCurrentUser, getFavoriteFilm, removeFavoriteMovie} from "../util/ApiUtils";
+import {addFavoriteMovie, getCurrentUser, getFavoriteMovie, removeFavoriteMovie} from "../util/ApiUtils";
 import {Button} from "antd";
 import ifCurrentUser from "./useCurrentUser";
 import {navigate} from "@reach/router";
@@ -21,7 +21,7 @@ function MovieCard({id, enName, year, imbd, time, img}) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (isLoggedIn) {
-            getFavoriteFilm(localStorage.getItem("userId"))
+            getFavoriteMovie(localStorage.getItem("userId"))
                 .then(data => {
                     console.log("favorite movies: ", data);
                     const favoriteMovieIds = data.map(movie => movie.id);
