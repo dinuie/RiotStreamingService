@@ -24,8 +24,7 @@ export default function LoginForm() {
             .then((response) => {
                 console.log(response.json);
                 localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                getUserId(usernameOrEmail).then(data => localStorage.setItem("userId", data))
-
+                getUserId(usernameOrEmail).then(data => localStorage.setItem("userId", data.id))
                 getCurrentUser();
                 if (localStorage.getItem("from")) {
                     navigate(localStorage.getItem("from"));

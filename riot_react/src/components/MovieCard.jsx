@@ -24,18 +24,39 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
 
   const isLoggedIn = ifCurrentUser();
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    if (isLoggedIn) {
-      getFavoriteFilm(localStorage.getItem("userId"))
-        .then((data) => {
-          console.log("favorite movies: ", data);
-          const favoriteMovieIds = data.map((movie) => movie.id);
-          setIsFavorite(favoriteMovieIds.includes(id));
-        })
-        .catch((error) => {
-          console.log("Error occurred while fetching favorite movies: ", error);
-        });
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (isLoggedIn) {
+            getFavoriteMovie(localStorage.getItem("userId"))
+                .then(data => {
+                    console.log("favorite movies: ", data);
+                    const favoriteMovieIds = data.map(movie => movie.id);
+                    setIsFavorite(favoriteMovieIds.includes(id));
+                })
+                .catch(error => {
+                    console.log("Error occurred while fetching favorite movies: ", error);
+                });
+        }
+    }, [id, isLoggedIn]);
+
+    function handleFavorite() {
+        if (isLoggedIn) {
+            setIsFavorite(!isFavorite);
+            if (isFavorite) {
+                removeFavoriteMovie(localStorage.getItem("userId"), id)
+                    .then(() => setIsFavorite(false))
+                    .catch(error => {
+                        console.log("Error occurred while removing favorite movie: ", error);
+                    });
+            } else {
+                addFavoriteMovie(localStorage.getItem("userId"), id)
+                    .then(() => setIsFavorite(true))
+                    .catch(error => {
+                        console.log("Error occurred while adding favorite movie: ", error);
+                    });
+            }
+        }
+
     }
   }, [id, isLoggedIn]);
 
@@ -101,9 +122,11 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
               </Button>
             </div>
           )}
+          {isLoggedIn && (
           <div className="text-white text-sm font-sans font-normal">
             Add to favorites
           </div>
+          )}
         </div>
       </div>
       <div className="clear-both" />

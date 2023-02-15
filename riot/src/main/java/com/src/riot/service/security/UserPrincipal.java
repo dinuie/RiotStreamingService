@@ -19,6 +19,9 @@ public class UserPrincipal implements UserDetails {
 
     private String username;
 
+    private String userDateOfBirth;
+
+
     @JsonIgnore
     private String email;
 
@@ -27,9 +30,10 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String username, String userDateOfBirth, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
+        this.userDateOfBirth=userDateOfBirth;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -42,6 +46,7 @@ public class UserPrincipal implements UserDetails {
         return new UserPrincipal(
                 user.getId(),
                 user.getUsername(),
+                user.getUserDateOfBirth(),
                 user.getUserEmail(),
                 user.getUserPassword(),
                 authorities
@@ -54,6 +59,14 @@ public class UserPrincipal implements UserDetails {
 
     public String getName() {
         return name;
+    }
+
+    public String getUserDateOfBirth() {
+        return userDateOfBirth;
+    }
+
+    public void setUserDateOfBirth(String userDateOfBirth) {
+        this.userDateOfBirth = userDateOfBirth;
     }
 
     public String getEmail() {

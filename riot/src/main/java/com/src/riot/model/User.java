@@ -58,6 +58,11 @@ public class User {
         this.userPassword = userPassword;
     }
 
+    public User(String userName, String userDateOfBirth, String userEmail) {
+        this.username = userName;
+        this.userDateOfBirth = userDateOfBirth;
+        this.userEmail = userEmail;}
+
     public void addRole(Role role) {
         roles.add(role);
         role.getUserSet().add(this);
