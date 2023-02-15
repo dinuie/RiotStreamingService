@@ -10,6 +10,7 @@ import Welcome from "./pages/Welcome";
 import ProfilePage from "./pages/Profile";
 
 function App() {
+
   const isLoggedIn = useCurrentUser();
 
   return (

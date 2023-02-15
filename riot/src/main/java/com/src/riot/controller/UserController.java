@@ -128,9 +128,9 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public Long getUserProfile(@RequestParam(value = "username") String username, @AuthenticationPrincipal UserPrincipal currentUser) {
-        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
-        return userSummary.getId();
+    public User   getUserProfile(@RequestParam(value = "username") String username, @AuthenticationPrincipal UserPrincipal currentUser) {
+        User user = new User(currentUser.getUsername(), currentUser.getUserDateOfBirth(), currentUser.getEmail());
+        return user;
     }
 
 
