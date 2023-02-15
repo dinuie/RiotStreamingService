@@ -209,7 +209,7 @@ function Home() {
         <br></br>
       </div>
       <div>
-        <div className="mt-12 right-5 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-2">
+        <div className="mt-12 right-8 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-3">
           <Autorenew
             className={spin ? classes.spin : classes.refresh}
             onClick={refreshCanvas}
