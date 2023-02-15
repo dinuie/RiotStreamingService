@@ -21,7 +21,7 @@ const SimilarMovies = ({ genreIds }) => {
 
   return (
     <div className="m-10">
-      <h2 className="text-2xl text-white font-sans font-semibold mb-5 m-3">
+      <h2 className="text-2xl text-white font-sans font-semibold m-3">
         You might also like:
       </h2>
       <Carousel

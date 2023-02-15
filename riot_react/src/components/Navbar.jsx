@@ -29,10 +29,10 @@ const Navbar = (props) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-        // navigate("/");
+      // navigate("/");
     }
   }, [isLoggedIn, navigate]);
-  const handleProfile = () =>{
+  const handleProfile = () => {
     window.location.href = "/Profile";
   };
 
@@ -65,7 +65,7 @@ const Navbar = (props) => {
         {isLoggedIn ? (
           <Toolbar>
             {isLoggedIn && (
-              <div className="rounded-full text-black  ml-7 mb-0 mt-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 px-1.5 py-1.5 text-center mr-2">
+              <div className="rounded-full text-black ml-7 mb-0 mt-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 px-1.5 py-1.5 text-center">
                 <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
