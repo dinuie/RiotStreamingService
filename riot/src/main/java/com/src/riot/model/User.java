@@ -47,6 +47,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+    @ManyToMany
+    private List<Movie> favorite_movie_id=new ArrayList<>();
+
 
     public User(String userName, String userDateOfBirth, String userEmail, String userPassword) {
         this.username = userName;
@@ -55,7 +58,7 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public void addRole(Role role){
+    public void addRole(Role role) {
         roles.add(role);
         role.getUserSet().add(this);
     }

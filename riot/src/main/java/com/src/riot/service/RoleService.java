@@ -2,10 +2,7 @@ package com.src.riot.service;
 
 import com.src.riot.model.Role;
 import com.src.riot.model.types.RoleName;
-import com.src.riot.service.DAO.MovieGenreRepository;
-import com.src.riot.service.DAO.MovieRepository;
-import com.src.riot.service.DAO.RoleRepository;
-import com.src.riot.service.DAO.UserRepository;
+import com.src.riot.service.DAO.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
