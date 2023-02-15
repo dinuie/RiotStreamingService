@@ -10,6 +10,7 @@ import {addFavoriteMovie, getCurrentUser, getFavoriteFilm, removeFavoriteMovie} 
 import {Button} from "antd";
 import ifCurrentUser from "./useCurrentUser";
 import {navigate} from "@reach/router";
+import { BsSuitHeart, BsFillSuitHeartFill } from 'react-icons/bs';
 
 function MovieCard({id, enName, year, imbd, time, img}) {
     if (!img || !enName || !imbd) return null;
@@ -76,10 +77,28 @@ function MovieCard({id, enName, year, imbd, time, img}) {
                     </div>
                 )}
             </Link>
-            <div className="clear-both"/>
-            <p className="pl-1 pt-1 mt-0.5 text-white font-sans text-l">
-                {enName} ({year})
-            </p>
+            <div className="clear-both" />
+      <div className="flex justify-between items-center">
+        <p className="pl-1 pt-1 mt-0.5 text-white font-sans text-l">
+          {enName} ({year})
+        </p>
+        <div className="flex items-center">
+          {isLoggedIn && (
+            <div className="mr-2">
+              <Button
+                variant="outline-danger"
+                onClick={handleFavorite}
+                className="border-0 text-white text-2xl p-0 m-0"
+              >
+                {isFavorite ? <BsFillSuitHeartFill /> : <BsSuitHeart />}
+              </Button>
+            </div>
+          )}
+          <div className="text-white text-sm font-sans font-normal">
+            Add to favorites
+          </div>
+        </div>
+      </div>
             <div className="clear-both"/>
             <div
                 className="bg-slate-900
@@ -106,9 +125,17 @@ function MovieCard({id, enName, year, imbd, time, img}) {
                     {time}
                 </h4>
             </div>
+            <div className="
+        p-2
+        absolute 
+        left-0
+        bottom-0
+        bg-opacity-30
+        mb-2
+        ">      
+            </div>
             <div
-                className="bg-white
-        rounded-full
+                className="
         p-2
         absolute 
         left-4
@@ -134,14 +161,6 @@ function MovieCard({id, enName, year, imbd, time, img}) {
                     />
                     IMDb {imbd}
                 </h4>
-                {isLoggedIn && (<div>
-                    <Button
-                        variant="outline-danger"
-                        onClick={handleFavorite}
-                    >
-                        {isFavorite ? '❤️ Favorite' : '♡ Favorite'}
-                    </Button>
-                </div>)}
 
             </div>
         </div>

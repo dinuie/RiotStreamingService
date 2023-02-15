@@ -70,7 +70,7 @@ const ProfilePage = () => {
             Save Changes
         </button>
                 </p>
-            <Link to="/">
+            <Link to="/home">
                 <button
                     style={{ position: "absolute", left: "0", top: "0" }}
                     className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center m-5'>
