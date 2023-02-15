@@ -141,6 +141,7 @@ export function getUserId(username) {
     })
 }
 
+
 export function getUserProfile(username) {
     return request({
         url: "/users/" + username,

@@ -9,48 +9,35 @@ import {
 const Footer = () => {
   return (
     <footer
+      className="bg-black bg-opacity-50 text-lightgrey py-5 text-center font-sans"
       style={{
-        backgroundColor: "black",
-        color: "lightgrey",
-        padding: "20px",
-        textAlign: "center",
-        position: "fixed",
-        bottom: 0,
+        position: "relative",
+        top: "33rem",
         width: "100%",
-        fontFamily: "Helvetica",
       }}
     >
-      <p>
-        Stream all your favorite movies with ease on our app. Stay up to date
-        with the latest releases and never run out of things to watch!
-      </p>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="flex justify-center">
         <a href="#">
           <FontAwesomeIcon
             icon={faFacebookSquare}
-            style={{ color: "white", margin: "10px" }}
-            size="2x"
+            className="text-white m-2 text-2xl"
           />
         </a>
         <a href="#">
           <FontAwesomeIcon
             icon={faInstagram}
-            style={{ color: "white", margin: "10px" }}
-            size="2x"
+            className="text-white m-2 text-2xl"
           />
         </a>
         <a href="#">
           <FontAwesomeIcon
             icon={faTwitterSquare}
-            style={{ color: "white", margin: "10px" }}
-            size="2x"
+            className="text-white m-2 text-2xl"
           />
         </a>
       </div>
-      <p>
-        Copyright &copy; {new Date().getFullYear()}{" "}
-        <b className="text-purple-600">RIOT STREAMING SERVICE</b>
-      </p>
+      <p className="text-white">Copyright &copy; {new Date().getFullYear()} </p>
+      <b className="text-purple-600">RIOT STREAMING SERVICE</b>
     </footer>
   );
 };
