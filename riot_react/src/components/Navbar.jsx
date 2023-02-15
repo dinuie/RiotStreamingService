@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import ifCurrentUser from "../components/useCurrentUser";
+import useCurrentUser from "../components/useCurrentUser";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +25,7 @@ const Navbar = (props) => {
   const { showSearchBox = true } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const isLoggedIn = ifCurrentUser();
+  const isLoggedIn = useCurrentUser();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -44,12 +44,13 @@ const Navbar = (props) => {
   };
   const handleLogout = () => {
     getLogout();
+    localStorage.removeItem("from");
     window.location.reload();
   };
 
   return (
     <div className="flex items-center justify-between p-4 z-[100] w-full absolute">
-      <Link to="/">
+      <Link to="/home">
         <h1 className="text-purple-600 hover:text-pink-500 font-sans font-semibold text-3xl">
           RIOT STREAMING SERVICE
         </h1>
@@ -101,7 +102,9 @@ const Navbar = (props) => {
         ) : (
           <>
             <Link to="/auth/login">
-              <button className="text-white hover:text-pink-500 font-sans font-semibold pr-4">Sign In</button>
+              <button className="text-white hover:text-pink-500 font-sans font-semibold pr-4">
+                Sign In
+              </button>
             </Link>
             <Link to="/auth/register">
               <button className="text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center">

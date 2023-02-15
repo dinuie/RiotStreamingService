@@ -141,6 +141,7 @@ const ProfilePage = () => {
                     </Carousel>
                 </div>
             </div>
+
         </div>
     )
         ;

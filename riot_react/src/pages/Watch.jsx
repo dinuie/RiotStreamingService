@@ -9,12 +9,17 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import SimilarMovies from "../components/SimilarMovies";
+
 import MenuItem from "@mui/material/MenuItem";
+
+import useCurrentUser from "../components/useCurrentUser";
+
 
 const Watch = (props) => {
   const [movieGenre, setMovieGenre] = useState([false]);
   const [movie, setMovie] = useState({});
   const { id } = useParams();
+  const isLoggedIn = useCurrentUser();
 
   const movieGenreList = async () => {
     getMovieGenre()
@@ -85,20 +90,52 @@ const Watch = (props) => {
                     {option.name}
                   </h2>
               ))}
+
             </h2>
+            <img
+              name="image"
+              className={" w-full rounded-xl bg-cover "}
+              style={{ height: "100%" }}
+              alt={movie?.english_title}
+              src={"https://image.tmdb.org/t/p/w500" + movie?.backdrop_path}
+            />
+            <div className="mt-6">
+              <h2>
+                IMDb: {movie?.imdb}
+                <FontAwesomeIcon
+                  className="fa-2xs mb-1 ml-0.5 text-yellow-400 shadow-lg font-bold"
+                  icon={faStar}
+                />
+              </h2>
+              <h2>Release: {movie?.release_date}</h2>
+              <h2>
+                Duration:{" "}
+                {Math.floor(movie?.runtime / 60) +
+                  "h" +
+                  (movie.runtime % 60) +
+                  "m"}
+              </h2>
+              <h2>
+                Genres:{" "}
+                {movieGenre.map((option, i) => {
+                  <h2 key={i}>{option.name}</h2>;
+                  console.log(option);
+                })}
+              </h2>
+            </div>
+          </div>
+          <div>
+            <TorServer
+              movieId={id}
+              hash={movie?.hash}
+              backdrop_path={movie?.backdrop_path}
+            />
+          </div>
+          <div className="absolute inset-x-0 bottom-0 h-16">
+            <SimilarMovies genreIds={movie.genre_ids} />
           </div>
         </div>
-        <div>
-          <TorServer
-            movieId={id}
-            hash={movie?.hash}
-            backdrop_path={movie?.backdrop_path}
-          />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 h-16">
-          <SimilarMovies genreIds={movie.genre_ids} />
-        </div>
-      </div>
+      )}
       <Footer />
     </div>
   );
