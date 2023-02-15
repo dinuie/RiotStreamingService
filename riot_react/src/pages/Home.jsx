@@ -3,6 +3,7 @@ import StyledMenu from "../components/StyleMenu";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 // import { CircularProgress } from "@mui/material";
+import { Autorenew } from "@mui/icons-material";
 import {
   getMovieByGenre,
   getMovieByYearRelease,
@@ -22,9 +23,25 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "1px",
     overflow: "hidden! important ",
   },
+  refresh: {
+    margin: "auto",
+  },
+  spin: {
+    margin: "auto",
+    animation: "$spin 1s 1",
+  },
+  "@keyframes spin": {
+    "0%": {
+      transform: "rotate(0deg)",
+    },
+    "100%": {
+      transform: "rotate(360deg)",
+    },
+  },
 }));
 
 function Home() {
+  const [spin, setSpin] = useState(0);
   const classes = useStyles();
   const [isAtTop, changeGoToTop] = useState(false);
   const [searchedArray, setSearchedArray] = useState([false]);
@@ -191,6 +208,15 @@ function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const refreshCanvas = () => {
+    setSpin(true);
+    setTimeout(() => {
+      setSpin(false);
+      window.location.reload();
+    }, 1000);
+    console.log("Refreshed");
+  };
+
   return (
     <div className="relative bg-gray-900">
       <div>
@@ -200,6 +226,13 @@ function Home() {
         <br></br>
       </div>
       <div>
+        <div className="mt-12 right-5 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-2">
+          <Autorenew
+            className={spin ? classes.spin : classes.refresh}
+            onClick={refreshCanvas}
+            spin={spin}
+          />
+        </div>
         <Button
           id="demo-customized-button"
           aria-controls={open ? "demo-customized-menu" : undefined}
@@ -236,7 +269,7 @@ function Home() {
           aria-expanded={open ? "true" : undefined}
           onClick={handleClickYearButton}
           endIcon={<KeyboardArrowDownIcon />}
-          class="text-black font-sans ml-3 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+          class="text-black font-sans ml-3 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-6 py-2.5 text-center mr-2"
         >
           YEAR
         </Button>
