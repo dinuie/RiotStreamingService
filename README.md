@@ -5,7 +5,7 @@ Riot Streaming Service provides effortless access to all your favorite movies, e
 In order to run this project, you must run the RiotApplication with an IDE and also open riot_react folder with an IDE and type npm/yarn install then npm start/yarn start in the terminal.
 
 Main technologies used : 
--Java
+-Java  
 -JavaScript
 -PostgreSQL
 -Tailwind
