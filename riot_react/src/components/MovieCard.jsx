@@ -94,9 +94,11 @@ function MovieCard({id, enName, year, imbd, time, img}) {
               </Button>
             </div>
           )}
+          {isLoggedIn && (
           <div className="text-white text-sm font-sans font-normal">
             Add to favorites
           </div>
+          )}
         </div>
       </div>
             <div className="clear-both"/>
