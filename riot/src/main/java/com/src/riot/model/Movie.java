@@ -38,6 +38,16 @@ public class Movie {
     private List<Integer> genre_ids;
     private String hash;
     private String update;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "favorite_ids",
+            joinColumns = @JoinColumn(name = "favorite_movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> userSet = new HashSet<>();
+
+    public void addFavoriteMovie(User user){
+        userSet.add(user);
+        user.getFavorite_movie_id().add(this);
+    }
 
 }
 

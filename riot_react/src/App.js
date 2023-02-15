@@ -29,14 +29,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/" element={<Welcome />} />
             <Route path="/watch/:id" element={<Watch />} />
+            <Route path="/profile" element={<ProfilePage/>}/>
           </Routes>
         </Container>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/watch/:id" element={<Watch />} />
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path="/profile" element={<ProfilePage/>}/>
-        </Routes>
       ) : (
         <>
           <Routes>

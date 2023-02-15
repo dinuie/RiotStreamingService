@@ -9,9 +9,6 @@ import { loadFull } from "tsparticles";
 const Welcome = () => {
   const particlesInit = useCallback(async (engine) => {
     console.log(engine);
-    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(engine);
   }, []);
 
@@ -103,7 +100,7 @@ const Welcome = () => {
       <div className="h-screen flex items-center justify-center">
         <div className="text-white text-center py-10">
           <p className="relative font-sans font-semibold max-w-lg">
-            Our app provides you with effortless access to all your favorite
+            Our app provides effortless access to all your favorite
             movies, ensuring that you never run out of options to watch. With
             regular updates and the latest releases, you can stay up to date
             with the most popular films in the industry. Enjoy seamless

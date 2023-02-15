@@ -6,12 +6,13 @@ import { useState } from 'react';
 const ProfilePage = () => {
     const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
     const [username, setUsername] = useState('John Doe');
-    const [dateOfBirth, setDateOfBirth] = useState('20-09-1995')
-    const [email, setEmail] = useState('admin@admin.com')
+    const [dateOfBirth, setDateOfBirth] = useState('20-09-1995');
+    const [email, setEmail] = useState('admin@admin.com');
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value); 
     }
+
     const handleDateOfBirthChange = (event) =>{
         setDateOfBirth(event.target.value);
     }
