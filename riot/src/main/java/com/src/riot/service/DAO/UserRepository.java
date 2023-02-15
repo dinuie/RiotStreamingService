@@ -1,5 +1,6 @@
 package com.src.riot.service.DAO;
 
+import com.src.riot.model.Movie;
 import com.src.riot.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +11,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //    User createUser(User user);
     @Query("SELECT u FROM User u where u.userEmail=?1")
     User userLoginEmail(String userEmail);
-
     @Query("SELECT u FROM User u where u.userPassword=?1 and u.userEmail=?2")
     User userLoginPass(String userPassword, String userEmail);
 
@@ -25,10 +25,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select id from User where id=?1")
     List<User> findByIdIn(List<Long> userIds);
-
-    @Query("SELECT username from User where username=?1")
-    Optional<User> findByUsername(String username);
-
+@Query("select u.favorite_movie_id from User u where u.id=?1")
+List<Movie> getFavoriteMovie(Long userId);
     Boolean existsByUsername(String username);
 @Query("SELECT\n" +
         "    CASE WHEN EXISTS \n" +

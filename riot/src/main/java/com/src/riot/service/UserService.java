@@ -1,10 +1,8 @@
 package com.src.riot.service;
 
+import com.src.riot.model.Movie;
 import com.src.riot.model.User;
-import com.src.riot.service.DAO.MovieGenreRepository;
-import com.src.riot.service.DAO.MovieRepository;
-import com.src.riot.service.DAO.RoleRepository;
-import com.src.riot.service.DAO.UserRepository;
+import com.src.riot.service.DAO.*;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +13,8 @@ import java.util.Optional;
 @Service("userService")
 @Transactional
 public class UserService extends BaseService {
+
+
     public UserService(UserRepository userRepository, MovieRepository movieRepository, RoleRepository roleRepository, MovieGenreRepository movieGenreRepository) {
         super(userRepository, movieRepository, roleRepository, movieGenreRepository);
     }
@@ -31,8 +31,8 @@ public class UserService extends BaseService {
         return userRepository.userLoginPass(userPassword, userEmail);
     }
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByUsername(String username) {
+        return userRepository.findByUserName(username);
     }
 
     public Boolean existByEmail(String email){
@@ -50,4 +50,9 @@ public class UserService extends BaseService {
     public User save(User user) {
         return userRepository.save(user);
     }
+//    public void addFavoriteMovie(Integer modieId){
+//
+//    }
+    public Optional<User> findById (Long userId){return userRepository.findById(userId);}
+public List<Movie> getFavoriteMovie(Long userId){return userRepository.getFavoriteMovie(userId);}
 }

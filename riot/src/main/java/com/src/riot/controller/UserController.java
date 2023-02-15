@@ -32,6 +32,8 @@ public class UserController {
     MovieService movieService;
     @Autowired
     MovieGenreService movieGenreService;
+//    @Autowired
+//    FavoriteService favoriteService;
 
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -59,9 +61,48 @@ public class UserController {
     }
 
     @GetMapping("/movie/year")
-    public List<String> getYear(){
-    return  movieService.getYear();
+    public List<String> getYear() {
+        return movieService.getYear();
     }
+
+    @PostMapping("/favorites")
+    public ResponseEntity<String> addFavoriteMovie(@RequestParam(value = "userId") Long userId, @RequestParam(value = "movieId") Long movieId) {
+        Optional<Movie> movieOptional = movieService.findById(movieId);
+        Movie movie = movieOptional.orElseThrow(() -> new RuntimeException("Movie not found with ID: " + movieId));
+        Optional<User> userOptional = userService.findById(userId);
+        User user = userOptional.orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+        if (!user.getFavorite_movie_id().contains(movie)) {
+            user.getFavorite_movie_id().add(movie);
+
+            User updatedUser = userService.save(user);
+
+            return ResponseEntity.ok("Added favorite movie " + movieId + " to user " + updatedUser.getUsername());
+        } else {
+            return ResponseEntity.ok("Movie " + movieId + " is already a favorite of user " + user.getUsername());
+        }
+    }
+    @GetMapping("/favorites")
+    public List<Movie> getFavoriteMovie(@RequestParam(value = "userId")Long userId){
+        return userService.getFavoriteMovie(userId);
+    }
+
+    @DeleteMapping("/favorite/removeMovieId")
+    public ResponseEntity<String> removeFavoriteMovieByUser(@RequestParam(value = "movieId") Long movieId, @RequestParam(value = "userId") Long userId) {
+        Optional<Movie> movieOptional = movieService.findById(movieId);
+        Movie movie = movieOptional.orElseThrow(() -> new RuntimeException("Movie not found with ID: " + movieId));
+        Optional<User> userOptional = userService.findById(userId);
+        User user = userOptional.orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+        if (user.getFavorite_movie_id().contains(movie)) {
+            user.getFavorite_movie_id().remove(movie);
+
+            User updatedUser = userService.save(user);
+
+            return ResponseEntity.ok("Deleted favorite movie " + movieId + " to user " + updatedUser.getUsername());
+        } else {
+            return ResponseEntity.ok("Movie " + movieId + " is not favorite of user " + user.getUsername());
+        }
+    }
+
 
 
     @GetMapping("/watch")
@@ -86,14 +127,10 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/users")
-    public User getUserProfile(@PathVariable(value = "username") String username) {
-        User user = userService.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-        user.getUsername();
-
-//        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getCreatedAt());
-        return user;
+    @GetMapping("/user")
+    public Long getUserProfile(@RequestParam(value = "username") String username, @AuthenticationPrincipal UserPrincipal currentUser) {
+        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+        return userSummary.getId();
     }
 
 
