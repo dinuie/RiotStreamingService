@@ -5,47 +5,45 @@ import { useState } from 'react';
 
 const ProfilePage = () => {
     const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
-    const [aboutMeText, setAboutMeText] = useState('');
-    const [showAboutMeInput, setShowAboutMeInput] = useState(false);
+    const [username, setUsername] = useState('John Doe');
+    const [dateOfBirth, setDateOfBirth] = useState('20-09-1995')
+    const [email, setEmail] = useState('admin@admin.com')
 
-    const handleAboutMeTextChange = (event) => {
-        setAboutMeText(event.target.value);
-    };
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value); 
+    }
+    const handleDateOfBirthChange = (event) =>{
+        setDateOfBirth(event.target.value);
+    }
 
-    const handleAboutMeKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            setShowAboutMeInput(false);
-        }
-    };
+    const handleEmailChange = (event) =>{
+        setEmail(event.target.value);
+    }
 
     const handlePasswordChange = () => {
         console.log("Password changed");
     };
 
+    const handleSaveChanges = () =>{
+        console.log("Changes saved !");
+    }
+
     return (
-        <div style={{ backgroundColor: "#111827", color: "white", textAlign: "center" }}>
-            <h1>Hello User !</h1>
-            <p>Username: John Doe</p>
-            <p>Date of Birth: 20-09-1995</p>
-            <p>email: admin@admin.com</p>
-            <p>About Me:</p>
+        <div style={{background:`url(https://i.imgur.com/zn8ODjk.jpg) no-repeat center center fixed`, backgroundSize: "cover", backgroundColor: "#111827", color: "white", textAlign: "center", height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", fontSize: "25px"  }}>
+            <h1 style={{ fontSize: "36px", marginBottom: "4rem" }}>Hello User!</h1>
+            <p style={{ marginBottom: "2rem" }}>
+                Username : 
+                <input type="text" value={username} onChange={handleUsernameChange} style={{ backgroundColor: "transparent", color: "white", border: "none", borderBottom: "1px solid white", textAlign: "center" }} />
+            </p>
+            <p style={{ marginBottom: "2rem" }}>
+                Date of Birth : 
+                <input type="text" value={dateOfBirth} onChange={handleDateOfBirthChange} style={{ backgroundColor: "transparent", color: "white", border: "none", borderBottom: "1px solid white", textAlign: "center" }} />
+                </p>
+            <p style={{ marginBottom: "2rem" }}>
+                Email :  
+                <input type="text" value={email} onChange={handleEmailChange} style={{ backgroundColor: "transparent", color: "white", border: "none", borderBottom: "1px solid white", textAlign: "center" }} />
+                </p>
             <p>
-                {showAboutMeInput ? (
-                    <input
-                        type="text"
-                        value={aboutMeText}
-                        onChange={handleAboutMeTextChange}
-                        onKeyPress={handleAboutMeKeyPress}
-                        style={{ color: "black" }}
-                    />
-                ) : (
-                    <div className='flex justify-center px-5 py-5'>
-                        <p className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm text-center px-5 py-5'
-                            onClick={() => setShowAboutMeInput(true)} >
-                            {aboutMeText || 'Click to add a description'}
-                        </p>
-                    </div>
-                )}
                 {isPasswordModalOpen && (
                     <div>
                         <div>
@@ -64,11 +62,17 @@ const ProfilePage = () => {
                         Change password
                     </button>
                 )}
-            </p>
+                <button 
+            className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center'
+            onClick={handleSaveChanges}
+        >
+            Save Changes
+        </button>
+                </p>
             <Link to="/">
                 <button
                     style={{ position: "absolute", left: "0", top: "0" }}
-                    className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center'>
+                    className='text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center m-5'>
                     Back to Homepage
                 </button>
             </Link>

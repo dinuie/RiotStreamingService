@@ -7,6 +7,7 @@ import Watch from "./pages/Watch";
 import useCurrentUser from "./components/useCurrentUser";
 import { Container } from "react-bootstrap";
 import Welcome from "./pages/Welcome";
+import ProfilePage from "./pages/Profile";
 
 function App() {
   // const navigate = useNavigate(); // React Hook
@@ -30,6 +31,12 @@ function App() {
             <Route path="/watch/:id" element={<Watch />} />
           </Routes>
         </Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/watch/:id" element={<Watch />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/profile" element={<ProfilePage/>}/>
+        </Routes>
       ) : (
         <>
           <Routes>
