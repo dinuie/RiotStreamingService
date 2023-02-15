@@ -1,10 +1,7 @@
 package com.src.riot.service;
 
 import com.src.riot.model.MovieGenre;
-import com.src.riot.service.DAO.MovieGenreRepository;
-import com.src.riot.service.DAO.MovieRepository;
-import com.src.riot.service.DAO.RoleRepository;
-import com.src.riot.service.DAO.UserRepository;
+import com.src.riot.service.DAO.*;
 
 public class BaseService {
     protected UserRepository userRepository;
