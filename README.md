@@ -5,14 +5,14 @@ Riot Streaming Service provides effortless access to all your favorite movies, e
 In order to run this project, you must run the RiotApplication with an IDE and also open riot_react folder with an IDE and type npm/yarn install then npm start/yarn start in the terminal.
 
 Main technologies used : 
--Java  
--JavaScript
--PostgreSQL
--Tailwind
--MUI
--SpringBoot
--React
--JWT Token
--Hibernate
+Java  
+JavaScript  
+PostgreSQL  
+Tailwind  
+MUI  
+SpringBoot  
+React  
+JWT Token  
+Hibernate  
 
 This project contains features like Login/Logout , Register, Infinite Scrolling, Year/Genre sorting for the movies, Search function, My Profile page which contains the user details, Active Streaming of any movie that is present on the platform, Movie suggestions based on the genre, Ability to like any movie and adding them in a list in the user profile.
