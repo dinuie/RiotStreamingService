@@ -86,31 +86,29 @@ export function getCurrentUser() {
 
 export function getMovieGenre() {
   return request({
-    url:API_BASE_URL+"/movieGenre",
-    method: "GET"
-  })
+    url: API_BASE_URL + "/movieGenre",
+    method: "GET",
+  });
 }
 
-export function  getMovieByGenre(genre){
+export function getMovieByGenre(genre) {
   return request({
-    url:API_BASE_URL + "/movieByGenre?genreId="+genre,
-    method:"GET"
-  })
+    url: API_BASE_URL + "/movieByGenre?genreId=" + genre,
+    method: "GET",
+  });
 }
-export function  getMovieByYearRelease(year){
+export function getMovieByYearRelease(year) {
   return request({
-    url:API_BASE_URL + "/movieByYearRelease?movieByYearRelease="+year,
-    method:"GET"
-  })
+    url: API_BASE_URL + "/movieByYearRelease?movieByYearRelease=" + year,
+    method: "GET",
+  });
 }
-export function  getYear(){
+export function getYear() {
   return request({
-    url:API_BASE_URL + "/movie/year",
-    method:"GET"
-  })
+    url: API_BASE_URL + "/movie/year",
+    method: "GET",
+  });
 }
-
-
 
 export function getUserProfile(username) {
   return request({

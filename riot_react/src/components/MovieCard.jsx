@@ -23,7 +23,7 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
       localStorage.setItem("from", `/watch/${id}`);
   };
 
-  const movieLink = isLoggedIn ? `/watch/${id}` : `/auth/login`;
+ const movieLink = isLoggedIn ? `/watch/${id}` : `/auth/login`;
 
   return (
     <div className="static m-5 w-auto rounded-2xl bg-opacity-70 bg-clip-padding backdrop-blur drop-shadow-1g ">
