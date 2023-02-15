@@ -13,14 +13,6 @@ function App() {
   // const navigate = useNavigate(); // React Hook
   const isLoggedIn = useCurrentUser();
 
-  // useEffect(() => {
-  //   console.log("isLoggedIn", isLoggedIn);
-  //   if (isLoggedIn) {
-  //     console.log("navigating to root URL");
-  //     navigate("/");
-  //   }
-  // }, [isLoggedIn]);
-
   return (
     <div className="lg:p-0 bg-cover">
       {isLoggedIn ? (
