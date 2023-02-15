@@ -15,4 +15,4 @@ Main technologies used :
 -JWT Token
 -Hibernate
 
-This project contains features like Login/Logout , Register, Infinite Scrolling, Year/Genre sorting for the movies, Search function, My Profile page, Active Streaming of any movie that is present on the platform, Movie suggestions based on the genre, Ability to like any movie and adding them in a list in the user profile.
+This project contains features like Login/Logout , Register, Infinite Scrolling, Year/Genre sorting for the movies, Search function, My Profile page which contains the user details, Active Streaming of any movie that is present on the platform, Movie suggestions based on the genre, Ability to like any movie and adding them in a list in the user profile.
