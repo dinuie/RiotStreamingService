@@ -86,6 +86,11 @@ public class UserController {
         return userService.getFavoriteMovie(userId);
     }
 
+    @GetMapping("/movieGenreById")
+    public Set<String> getGenresNameByMovieId(@RequestParam(value = "movieId")Long movieId){
+        return movieService.findGenresByMovieId(movieId);
+    }
+
     @DeleteMapping("/favorite/removeMovieId")
     public ResponseEntity<String> removeFavoriteMovieByUser(@RequestParam(value = "movieId") Long movieId, @RequestParam(value = "userId") Long userId) {
         Optional<Movie> movieOptional = movieService.findById(movieId);
@@ -126,6 +131,7 @@ public class UserController {
         Boolean isAvailable = !userService.existByEmail(email);
         return new UserIdentityAvailability(isAvailable);
     }
+
 
     @GetMapping("/user")
     public User   getUserProfile(@RequestParam(value = "username") String username, @AuthenticationPrincipal UserPrincipal currentUser) {

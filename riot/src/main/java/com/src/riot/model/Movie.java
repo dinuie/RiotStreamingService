@@ -44,6 +44,7 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> userSet = new HashSet<>();
 
+
     public void addFavoriteMovie(User user){
         userSet.add(user);
         user.getFavorite_movie_id().add(this);

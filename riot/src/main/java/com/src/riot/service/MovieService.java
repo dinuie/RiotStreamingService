@@ -31,6 +31,16 @@ public class MovieService extends BaseService {
     public List<Movie> getMoviesByYearRelease(String id) {
         return movieRepository.getMoviesByYear(id);
     }
-    public List<String> getYear(){return movieRepository.getYears();}
-    public Optional<Movie> findById(Long id){return movieRepository.findById(id);}
+
+    public List<String> getYear() {
+        return movieRepository.getYears();
+    }
+
+    public Optional<Movie> findById(Long id) {
+        return movieRepository.findById(id);
+    }
+
+    public Set<String> findGenresByMovieId(Long movieId) {
+        return movieRepository.findGenresByMovieId(movieId);
+    }
 }

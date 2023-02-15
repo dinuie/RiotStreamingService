@@ -4,6 +4,7 @@ import com.src.riot.model.Movie;
 import com.src.riot.model.MovieGenre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> getMoviesByYear(String movieYearRelease);
     @Query("Select DISTINCT  EXTRACT(YEAR FROM TO_DATE(u.release_date, 'YYYY-MM-DD')) as year from Movie u order by year DESC ")
     List<String> getYears();
+    @Query("SELECT g.Name FROM MovieGenre g JOIN g.moviesSet m WHERE m.id = ?1")
+    Set<String> findGenresByMovieId(Long movieId);
 }

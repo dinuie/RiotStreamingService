@@ -134,6 +134,15 @@ export function getFavoriteMovie(userId) {
     })
 }
 
+export function getGenresNameByMovieId(movieId){
+    return request(
+        {
+            url:API_BASE_URL+"/movieGenreById?movieId="+movieId,
+            method:"GET"
+        }
+    )
+}
+
 export function getUserId(username) {
     return request({
         url: API_BASE_URL + "/user?username=" + username,
