@@ -1,23 +1,24 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import RegistrationForm from "./pages/RegistrationForm";
 import LoginForm from "./pages/LoginForm";
 import React, { useEffect } from "react";
 import Watch from "./pages/Watch";
-import ifCurrentUser from "./components/useCurrentUser";
+import useCurrentUser from "./components/useCurrentUser";
 import { Container } from "react-bootstrap";
-
-import { navigate } from "@reach/router";
 import Welcome from "./pages/Welcome";
 
 function App() {
-  const isLoggedIn = ifCurrentUser();
+  // const navigate = useNavigate(); // React Hook
+  const isLoggedIn = useCurrentUser();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   console.log("isLoggedIn", isLoggedIn);
+  //   if (isLoggedIn) {
+  //     console.log("navigating to root URL");
+  //     navigate("/");
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <div className="lg:p-0 bg-cover">
