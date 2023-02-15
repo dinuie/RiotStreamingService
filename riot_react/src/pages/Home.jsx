@@ -3,6 +3,7 @@ import StyledMenu from "../components/StyleMenu";
 import React, {useCallback, useEffect, useState, useRef} from "react";
 import Navbar from "../components/Navbar";
 // import { CircularProgress } from "@mui/material";
+import { Autorenew } from "@mui/icons-material";
 import {
     getMovieByGenre,
     getMovieByYearRelease,
@@ -15,29 +16,46 @@ import Button from "@mui/material/Button";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-    genreMenu: {
-        backgroundColor: "black !important",
-        color: "white !important",
-        marginTop: "45px",
-        marginLeft: "1px",
-        overflow: "hidden! important ",
+  genreMenu: {
+    backgroundColor: "black !important",
+    color: "white !important",
+    marginTop: "45px",
+    marginLeft: "1px",
+    overflow: "hidden! important ",
+  },
+  refresh: {
+    margin: "auto",
+  },
+  spin: {
+    margin: "auto",
+    animation: "$spin 1s 1",
+  },
+  "@keyframes spin": {
+    "0%": {
+      transform: "rotate(0deg)",
     },
+    "100%": {
+      transform: "rotate(360deg)",
+    },
+  },
 }));
 
 function Home() {
-    const classes = useStyles();
-    const [isAtTop, changeGoToTop] = useState(false);
-    const [searchedArray, setSearchedArray] = useState([false]);
-    const [startIndex, changeStartIndex] = useState(0);
-    const [isSearched, changeIsSearched] = useState("");
-    const debounceTimeoutId = useRef(null);
-    // const [loading, setLoading] = useState(false);
-    const [movieGenre, setMovieGenre] = useState([false]);
-    const [movieYear, setMovieYear] = useState([false]);
-    const [selectedFilter, setSelectedFilter] = useState(null);
-    const [anchorElMovieYear, setAnchorElMovieYear] = useState(null);
-    const [anchorElMovieGenre, setAnchorElMovieGenre] = useState(null);
-    const open = Boolean(anchorElMovieGenre);
+  const [spin, setSpin] = useState(0);
+  const classes = useStyles();
+  const [isAtTop, changeGoToTop] = useState(false);
+  const [searchedArray, setSearchedArray] = useState([false]);
+  const [startIndex, changeStartIndex] = useState(0);
+  const [isSearched, changeIsSearched] = useState("");
+  const debounceTimeoutId = useRef(null);
+  // const [loading, setLoading] = useState(false);
+  const [movieGenre, setMovieGenre] = useState([false]);
+  const [movieYear, setMovieYear] = useState([false]);
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [anchorElMovieYear, setAnchorElMovieYear] = useState(null);
+  const [anchorElMovieGenre, setAnchorElMovieGenre] = useState(null);
+  const open = Boolean(anchorElMovieGenre);
+
 
     const movieGenreList = async () => {
         getMovieGenre()
@@ -190,79 +208,84 @@ function Home() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+  const refreshCanvas = () => {
+    setSpin(true);
+    setTimeout(() => {
+      setSpin(false);
+      window.location.reload();
+    }, 1000);
+    console.log("Refreshed");
+  };
 
-    return (
-        <div className="relative bg-gray-900">
-            <div>
-                <Navbar handleSearch={handleSearch}/>
-                <br></br>
-                <br></br>
-                <br></br>
-            </div>
-            <div>
-                <Button
-                    id="demo-customized-button"
-                    aria-controls={open ? "demo-customized-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleClick}
-                    endIcon={<KeyboardArrowDownIcon/>}
-                    class="text-black font-sans ml-7 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
-                >
-                    GENRE
-                </Button>
-                <StyledMenu
-                    id="simple-menu"
-                    anchorEl={anchorElMovieGenre}
-                    keepMounted
-                    open={Boolean(anchorElMovieGenre)}
-                    onClose={() => setAnchorElMovieGenre(null)}
-                >
-                    {movieGenre.map((option, i) => (
-                        <MenuItem
-                            key={i}
-                            onClick={() => {
-                                handleClose(option.id);
-                            }}
-                        >
-                            {option.name}
-                        </MenuItem>
-                    ))}
-                </StyledMenu>
-                <Button
-                    id="demo-customized-button"
-                    aria-controls={open ? "demo-customized-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleClickYearButton}
-                    endIcon={<KeyboardArrowDownIcon/>}
-                    class="text-black font-sans ml-3 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
-                >
-                    YEAR
-                </Button>
-                <StyledMenu
-                    id="simple-menu"
-                    anchorEl={anchorElMovieYear}
-                    keepMounted
-                    open={Boolean(anchorElMovieYear)}
-                    onClose={() => setAnchorElMovieYear(null)}
-                >
-                    {movieYear.map((option, i) => (
-                        <MenuItem
-                            key={i}
-                            onClick={() => {
-                                handleCloseYear(option);
-                            }}
-                        >
-                            {option}
-                        </MenuItem>
-                    ))}
-                </StyledMenu>
-            </div>
-            <div
-                className={`md:grid md:grid-cols-3 md:gap-3 ${
-                    searchedArray.length ? "" : "hidden"
-                }`}
+  return (
+    <div className="relative bg-gray-900">
+      <div>
+        <Navbar handleSearch={handleSearch} />
+        <br></br>
+        <br></br>
+        <br></br>
+      </div>
+      <div>
+        <div className="mt-12 right-5 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-2">
+          <Autorenew
+            className={spin ? classes.spin : classes.refresh}
+            onClick={refreshCanvas}
+            spin={spin}
+          />
+        </div>
+        <Button
+          id="demo-customized-button"
+          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDownIcon />}
+          class="text-black font-sans ml-7 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+        >
+          GENRE
+        </Button>
+        <StyledMenu
+          id="simple-menu"
+          anchorEl={anchorElMovieGenre}
+          keepMounted
+          open={Boolean(anchorElMovieGenre)}
+          onClose={() => setAnchorElMovieGenre(null)}
+        >
+          {movieGenre.map((option, i) => (
+            <MenuItem
+              key={i}
+              onClick={() => {
+                handleClose(option.id);
+              }}
+            >
+              {option.name}
+            </MenuItem>
+          ))}
+        </StyledMenu>
+        <Button
+          id="demo-customized-button"
+          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClickYearButton}
+          endIcon={<KeyboardArrowDownIcon />}
+          class="text-black font-sans ml-3 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-6 py-2.5 text-center mr-2"
+        >
+          YEAR
+        </Button>
+        <StyledMenu
+          id="simple-menu"
+          anchorEl={anchorElMovieYear}
+          keepMounted
+          open={Boolean(anchorElMovieYear)}
+          onClose={() => setAnchorElMovieYear(null)}
+        >
+          {movieYear.map((option, i) => (
+            <MenuItem
+              key={i}
+              onClick={() => {
+                handleCloseYear(option);
+              }}
             >
                 {searchedArray.length > 0 ? (
                     searchedArray.map((e, i) => {
