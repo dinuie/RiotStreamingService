@@ -23,6 +23,12 @@ const ProfilePage = () => {
     }, []);
 
 
+    const cardStyle = {
+        width: "100%",
+        height: "320px",
+      };
+    
+
 
     return (
         <div style={{
@@ -87,7 +93,7 @@ const ProfilePage = () => {
                         infinite
                         autoplay
                         speed={300}
-                        slidesToShow={3}
+                        slidesToShow={Math.min(3, movies.length)}
                         slidesToScroll={1}
                     >
                         {movies.length > 0 ? (
