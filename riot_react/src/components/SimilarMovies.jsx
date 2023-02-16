@@ -29,7 +29,7 @@ const SimilarMovies = ({ genreIds }) => {
         infinite
         autoplay
         speed={300}
-        slidesToShow={Math.min(3, movies.length)}
+        slidesToShow={3}
         slidesToScroll={1}
       >
         {movies.map((movie) => (
