@@ -57,15 +57,15 @@ function Home() {
   const open = Boolean(anchorElMovieGenre);
   const movieGenreList = async () => {
     getMovieGenre()
-      .then((data) => {
-        setMovieGenre(data);
-      })
-      .then(function (response) {
-        console.log(`Fetch complete. (Not aborted)`);
-      })
-      .catch(function (err) {
-        console.error(` Err: ${err}`);
-      });
+        .then((data) => {
+          setMovieGenre(data);
+        })
+        .then(function (response) {
+          console.log(`Fetch complete. (Not aborted)`);
+        })
+        .catch(function (err) {
+          console.error(` Err: ${err}`);
+        });
   };
   useEffect(() => {
     movieGenreList();
@@ -74,16 +74,16 @@ function Home() {
   }, []);
   const movieYearList = async () => {
     getYear()
-      .then((data) => {
-        setMovieYear(data);
-        console.log(data);
-      })
-      .then(function (response) {
-        console.log(`Fetch complete. (Not aborted)`);
-      })
-      .catch(function (err) {
-        console.error(` Err: ${err}`);
-      });
+        .then((data) => {
+          setMovieYear(data);
+          console.log(data);
+        })
+        .then(function (response) {
+          console.log(`Fetch complete. (Not aborted)`);
+        })
+        .catch(function (err) {
+          console.error(` Err: ${err}`);
+        });
   };
   const handleClick = (event) => {
     setAnchorElMovieGenre(event.currentTarget);
@@ -126,7 +126,7 @@ function Home() {
       setLoading(false);
       if (!response.ok) {
         throw new Error(
-          `Error: Failed to load resource: the server responded with a status of ${response.status}`
+            `Error: Failed to load resource: the server responded with a status of ${response.status}`
         );
       }
       const data = await response.json();
@@ -134,9 +134,9 @@ function Home() {
         changeStartIndex(startIndex + 20);
       }
       setSearchedArray(
-        searchText
-          ? data
-          : searchedArray.concat(data.slice(startIndex, startIndex + 20))
+          searchText
+              ? data
+              : searchedArray.concat(data.slice(startIndex, startIndex + 20))
       );
     } catch (err) {
       console.error(err);
@@ -197,6 +197,7 @@ function Home() {
       }
     },
     [changeIsSearched, movieList]
+
   );
 
   const handleScroll = useCallback(() => {
@@ -231,20 +232,12 @@ function Home() {
   };
 
   return (
-    <div className="relative bg-gray-900">
-      <div>
-        <Navbar handleSearch={handleSearch} />
-        <br></br>
-        <br></br>
-        <br></br>
-      </div>
-      <div>
-        <div className="mt-12 right-8 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-3">
-          <Autorenew
-            className={spin ? classes.spin : classes.refresh}
-            onClick={refreshCanvas}
-            spin={spin}
-          />
+      <div className="relative bg-gray-900">
+        <div>
+          <Navbar handleSearch={handleSearch} />
+          <br></br>
+          <br></br>
+          <br></br>
         </div>
         <Button
           id="demo-customized-button"
@@ -346,10 +339,46 @@ function Home() {
           style={{ position: "fixed", right: "10px", top: "10px" }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          Back to Top
-        </button>
+          {searchedArray.length > 0 ? (
+              searchedArray.map((e, i) => {
+                return (
+                    <MovieCard
+                        key={i}
+                        id={e.id}
+                        enName={e.english_title}
+                        img={e.backdrop_path}
+                        imbd={e.imdb}
+                        object={e}
+                        time={Math.floor(e.runtime / 60) + "h" + (e.runtime % 60)}
+                        year={new Date(e.release_date).getFullYear()}
+                    />
+                );
+              })
+          ) : (
+              <h4 className="text-white text-center p-20 font-bold flex-col items-center">
+                No results found
+              </h4>
+          )}
+        </div>
+        <div id="searched" className="px-6 py-4">
+          {isSearched !== "" ? (
+              <h4 className="text-white text-center m-0 font-medium p-5 flex-col items-center">
+                You've searched: {isSearched}
+              </h4>
+          ) : (
+              ""
+          )}
+          <button
+              className={`text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-2.5 py-2.5 text-center ${
+                  isAtTop ? "" : "hidden"
+              }`}
+              style={{ position: "fixed", right: "10px", top: "10px" }}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            Back to Top
+          </button>
+        </div>
       </div>
-    </div>
   );
 }
 export default Home;
