@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Home() {
+  const [isFetching, setIsFetching] = useState(false);
   const [spin, setSpin] = useState(0);
   const classes = useStyles();
   const [isAtTop, changeGoToTop] = useState(false);
@@ -47,7 +48,7 @@ function Home() {
   const [startIndex, changeStartIndex] = useState(0);
   const [isSearched, changeIsSearched] = useState("");
   const debounceTimeoutId = useRef(null);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [movieGenre, setMovieGenre] = useState([false]);
   const [movieYear, setMovieYear] = useState([false]);
   const [selectedFilter, setSelectedFilter] = useState(null);
@@ -117,18 +118,21 @@ function Home() {
   const movieList = async (searchText) => {
     try {
       let response;
-      // setLoading(true);
+      setLoading(true);
       const endpoint = searchText
-        ? `api?title=${searchText}`
+        ? `api?english_title=${searchText}`
         : `api?startIndex=${startIndex}`;
       response = await fetch(endpoint);
-      // setLoading(false);
+      setLoading(false);
       if (!response.ok) {
         throw new Error(
           `Error: Failed to load resource: the server responded with a status of ${response.status}`
         );
       }
       const data = await response.json();
+      if (data.length === 20) {
+        changeStartIndex(startIndex + 20);
+      }
       setSearchedArray(
         searchText
           ? data
@@ -138,25 +142,18 @@ function Home() {
       console.error(err);
     }
   };
+
   useEffect(() => {
     movieList();
   }, [startIndex]);
-  const handleScroll = useCallback(() => {
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-      changeStartIndex(startIndex + 20);
-    }
-  }, [startIndex, changeStartIndex]);
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
   const handleSearch = useCallback(
     async (text) => {
-      if (debounceTimeoutId.current) {
-        clearTimeout(debounceTimeoutId.current);
-      }
-      debounceTimeoutId.current = setTimeout(async () => {
-        if (text !== null) {
+      if (text.length >= 2) {
+        if (debounceTimeoutId.current) {
+          clearTimeout(debounceTimeoutId.current);
+        }
+
+        debounceTimeoutId.current = setTimeout(async () => {
           changeIsSearched(text);
           try {
             const response = await fetch(`api?title=${text}`);
@@ -169,20 +166,53 @@ function Home() {
             let filteredArray = data.filter(function (obj) {
               return obj.english_title
                 .toLowerCase()
-                .includes(text.toLowerCase());
+                .startsWith(text.toLowerCase()); // Use startsWith instead of includes
             });
-            setSearchedArray(filteredArray);
+            filteredArray.sort(function (a, b) {
+              // Sort the array based on the position of the search string in the title
+              const indexA = a.english_title
+                .toLowerCase()
+                .indexOf(text.toLowerCase());
+              const indexB = b.english_title
+                .toLowerCase()
+                .indexOf(text.toLowerCase());
+              return indexA - indexB;
+            });
+            let otherMoviesArray = data.filter(function (obj) {
+              return (
+                obj.english_title.toLowerCase().includes(text.toLowerCase()) &&
+                !filteredArray.includes(obj)
+              );
+            });
+            let finalArray = filteredArray.concat(otherMoviesArray);
+            setSearchedArray(finalArray);
           } catch (err) {
             console.error(`Error: ${err}`);
           }
-        } else {
-          setSearchedArray([]);
-          changeIsSearched("");
-        }
-      }, 300);
+        }, 500);
+      } else if (text.length === 0) {
+        changeIsSearched("");
+        setSearchedArray([]);
+        movieList();
+      }
     },
-    [changeIsSearched, setSearchedArray]
+    [changeIsSearched, movieList]
   );
+
+  const handleScroll = useCallback(() => {
+    if (isSearched !== "" || isFetching) {
+      return;
+    }
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+      changeStartIndex((startIndex) => startIndex + 20);
+    }
+  }, [isSearched, isFetching]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
   useEffect(() => {
     const handleScroll = () => {
       changeGoToTop(window.scrollY > 200);
@@ -280,7 +310,7 @@ function Home() {
           searchedArray.length ? "" : "hidden"
         }`}
       >
-        {searchedArray.length > 0 ? (
+        {searchedArray ? (
           searchedArray.map((e, i) => {
             return (
               <MovieCard
