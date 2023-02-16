@@ -21,12 +21,6 @@ const ProfilePage = () => {
     useEffect(() => {
         getFavoriteMovie(localStorage.getItem("userId")).then(data => setMovies(data))
     }, []);
-
-
-    const cardStyle = {
-        width: "100%",
-        height: "320px",
-      };
     
 
 
@@ -93,7 +87,7 @@ const ProfilePage = () => {
                         infinite={movies.length>2}
                         autoplay
                         speed={300}
-                        slidesToShow={Math.min(3, movies.length)}
+                        slidesToShow={3}
                         slidesToScroll={1}
                     >
                         {movies.length > 0 ? (
@@ -106,7 +100,7 @@ const ProfilePage = () => {
                                         img={e.backdrop_path}
                                         imbd={e.imdb}
                                         object={e}
-                                        time={Math.floor(e.runtime / 60) + "h" + (e.runtime % 60)}
+                                        // time={Math.floor(e.runtime / 60) + "h" + (e.runtime % 60)}
                                         year={new Date(e.release_date).getFullYear()}
                                     />
                                 );
