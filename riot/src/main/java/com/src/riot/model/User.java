@@ -58,7 +58,8 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public User(String userName, String userDateOfBirth, String userEmail) {
+    public User(Long userId,String userName, String userDateOfBirth, String userEmail) {
+        this.id=userId;
         this.username = userName;
         this.userDateOfBirth = userDateOfBirth;
         this.userEmail = userEmail;}

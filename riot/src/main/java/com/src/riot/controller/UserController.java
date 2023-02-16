@@ -135,7 +135,7 @@ public class UserController {
 
     @GetMapping("/user")
     public User   getUserProfile(@RequestParam(value = "username") String username, @AuthenticationPrincipal UserPrincipal currentUser) {
-        User user = new User(currentUser.getUsername(), currentUser.getUserDateOfBirth(), currentUser.getEmail());
+        User user = new User(currentUser.getId(),currentUser.getUsername(), currentUser.getUserDateOfBirth(), currentUser.getEmail());
         return user;
     }
 
