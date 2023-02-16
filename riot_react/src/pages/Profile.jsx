@@ -84,7 +84,7 @@ const ProfilePage = () => {
                     </h2>
                     <Carousel
                         dots={false}
-                        infinite
+                        infinite={movies.length>2}
                         autoplay
                         speed={300}
                         slidesToShow={3}
