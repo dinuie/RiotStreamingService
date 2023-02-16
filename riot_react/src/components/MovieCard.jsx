@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {addFavoriteMovie, getCurrentUser, getFavoriteMovie, removeFavoriteMovie} from "../util/ApiUtils";
-import {Button} from "antd";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { addFavoriteMovie, getCurrentUser, getFavoriteMovie, removeFavoriteMovie } from "../util/ApiUtils";
+import { Button } from "antd";
 import ifCurrentUser from "./useCurrentUser";
 import { BsSuitHeart, BsFillSuitHeartFill } from 'react-icons/bs';
 
-function MovieCard({id, enName, year, imbd, time, img}) {
+function MovieCard({ id, enName, year, imbd, time, img }) {
     if (!img || !enName || !imbd) return null;
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isFavorite, setIsFavorite] = useState(false);
@@ -62,7 +62,7 @@ function MovieCard({id, enName, year, imbd, time, img}) {
                     <img
                         name="image"
                         className={" w-full rounded-xl bg-cover "}
-                        style={{height: "100%"}}
+                        style={{ height: "100%" }}
                         alt={enName}
                         src={"https://image.tmdb.org/t/p/w500" + img}
                     />
@@ -89,12 +89,14 @@ function MovieCard({id, enName, year, imbd, time, img}) {
                             </Button>
                         </div>
                     )}
-                    <div className="text-white text-sm font-sans font-normal">
-                        Add to favorites
-                    </div>
+                    {!isFavorite && (
+                        <div className="text-white text-sm font-sans font-normal">
+                            Add to favorites
+                        </div>
+                    )}
                 </div>
             </div>
-            <div className="clear-both"/>
+            <div className="clear-both" />
             <div
                 className="bg-slate-900
         rounded-full
@@ -148,7 +150,7 @@ function MovieCard({id, enName, year, imbd, time, img}) {
          font-sans
          font-normal
         "
-                    style={{textShadow: "1px 1px #000000"}}
+                    style={{ textShadow: "1px 1px #000000" }}
                 >
                     <FontAwesomeIcon
                         className="text-yellow-400 mr-1.5 shadow-lg font-bold"
