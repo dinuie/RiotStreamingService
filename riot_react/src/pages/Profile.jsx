@@ -4,20 +4,13 @@ import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import {getFavoriteMovie, getMovieByGenre, getMovieGenre, getUserId} from "../util/ApiUtils";
 import {Card, Carousel, Col, Row} from "antd";
+import MovieCard from "../components/MovieCard";
 
 const ProfilePage = () => {
     const [movies, setMovies] = useState([]);
-    const [currentMovie, setCurrentMovie] = useState(null);
-    const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
-    const [username, setUsername] = useState(null);
-    const [dateOfBirth, setDateOfBirth] = useState(null);
-    const [email, setEmail] = useState(null);
 
     const [user, setUser] = useState({})
-    // const handleUsernameChange = (event) => {
-    //     setUsername(event.target.value);
-    //     console.log(user)
-    // }
+
 
     useEffect(() => {
         console.log(localStorage.getItem("userId"))
@@ -28,10 +21,7 @@ const ProfilePage = () => {
     useEffect(() => {
         getFavoriteMovie(localStorage.getItem("userId")).then(data => setMovies(data))
     }, []);
-
-    const handleCardClick = (movie) => {
-        setCurrentMovie(movie);
-    };
+    
 
 
     return (
@@ -94,50 +84,32 @@ const ProfilePage = () => {
                     </h2>
                     <Carousel
                         dots={false}
-                        infinite
+                        infinite={movies.length>2}
                         autoplay
                         speed={300}
                         slidesToShow={3}
                         slidesToScroll={1}
                     >
-                        {movies.map((movie) => (
-                            <Link
-                                to={`/watch/${movie.id}`}
-                                key={movie.id}
-                                onClick={() => this.props.history.push(`/watch/${movie.id}`)()}
-                            >
-                                <Row gutter={16}>
-                                    <Col span={24}>
-                                        <Card
-                                            className="border-y-4 border-purple-600 m-3"
-                                            hoverable
-                                            onClick={() => handleCardClick(movie)}
-                                            cover={
-                                                <img
-                                                    className="h-64 w-auto object-cover"
-                                                    src={
-                                                        `https://image.tmdb.org/t/p/w500` + movie.backdrop_path
-                                                    }
-                                                    alt={movie.english_title}
-                                                />
-                                            }
-                                            bodyStyle={{padding: "8px"}}
-                                        >
-                                            <Card.Meta
-                                                title={movie.english_title}
-                                                description={
-                                                    <div className="font-sans font-semibold text-lightgrey">
-                                                        <p>IMDB rating: {movie.imdb}</p>
-                                                        <p>Release date: {movie.release_date}</p>
-                                                        <p>Duration: {movie.runtime} min</p>
-                                                    </div>
-                                                }
-                                            />
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </Link>
-                        ))}
+                        {movies.length > 0 ? (
+                            movies.map((e, i) => {
+                                return (
+                                    <MovieCard
+                                        key={i}
+                                        id={e.id}
+                                        enName={e.english_title}
+                                        img={e.backdrop_path}
+                                        imbd={e.imdb}
+                                        object={e}
+                                        // time={Math.floor(e.runtime / 60) + "h" + (e.runtime % 60)}
+                                        year={new Date(e.release_date).getFullYear()}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <h4 className="text-white text-center p-20 font-bold flex-col items-center">
+                                No favorite movies found !
+                            </h4>
+                        )}
                     </Carousel>
                 </div>
             </div>
