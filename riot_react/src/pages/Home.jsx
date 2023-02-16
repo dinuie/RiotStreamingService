@@ -44,10 +44,6 @@ function Home() {
   const classes = useStyles();
   const [isAtTop, changeGoToTop] = useState(false);
   const [searchedArray, setSearchedArray] = useState([false]);
-  const [startIndex, changeStartIndex] = useState(0);
-  const [isSearched, changeIsSearched] = useState("");
-  const debounceTimeoutId = useRef(null);
-  // const [loading, setLoading] = useState(false);
   const [movieGenre, setMovieGenre] = useState([false]);
   const [movieYear, setMovieYear] = useState([false]);
   const [selectedFilter, setSelectedFilter] = useState(null);
@@ -75,7 +71,6 @@ function Home() {
     getYear()
       .then((data) => {
         setMovieYear(data);
-        console.log(data);
       })
       .then(function (response) {
         console.log(`Fetch complete. (Not aborted)`);

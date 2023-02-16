@@ -10,15 +10,12 @@ const request = (options) => {
             "Authorization",
             "Bearer " + localStorage.getItem(ACCESS_TOKEN)
         );
-        console.log(headers);
     }
 
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
-    console.log(options);
     return fetch(options.url, options).then((response) =>
         response.json().then((json) => {
-            console.log(response);
             if (!response.ok) {
                 return Promise.reject(json);
             }
