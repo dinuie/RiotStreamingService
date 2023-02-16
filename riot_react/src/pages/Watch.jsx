@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { getGenresNameByMovieId, getMovieById, getMovieGenre } from "../util/ApiUtils";
+import {
+  getGenresNameByMovieId,
+  getMovieById,
+  getMovieGenre,  
+} from "../util/ApiUtils";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +33,7 @@ const Watch = (props) => {
         console.error(` Err: ${err}`);
       });
   };
+  
   useEffect(() => {
     movieGenreList();
     getMovieById(id)
@@ -78,16 +83,12 @@ const Watch = (props) => {
                   (movie.runtime % 60) +
                   "m"}
               </h2>
-              <div>
-                <h2 style={{ display: "inline-block", marginRight: "10px" }}>Genre:</h2>
-                <div style={{ display: "inline-block" }}>
-                  {movieGenre.map((option, i) => (
-                    <h2 key={i} style={{ display: "inline-block", marginRight: "10px" }}>
-                      {option}
-                    </h2>
-                  ))}
-                </div>
-              </div>
+              <h2>
+                Genres:
+                {movieGenre.map((option, i) => (
+                  <h2 key={i}>{option}</h2>
+                ))}
+              </h2>
             </div>
           </div>
           <div>

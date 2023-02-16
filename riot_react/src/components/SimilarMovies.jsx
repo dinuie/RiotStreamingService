@@ -5,7 +5,6 @@ import { getMovieByGenre } from "../util/ApiUtils";
 
 const SimilarMovies = ({ genreIds }) => {
   const [movies, setMovies] = useState([]);
-  const [currentMovie, setCurrentMovie] = useState(null);
 
   useEffect(() => {
     const fetchSimilarMovies = async () => {
@@ -14,10 +13,6 @@ const SimilarMovies = ({ genreIds }) => {
     };
     fetchSimilarMovies();
   }, [genreIds]);
-
-  const handleCardClick = (movie) => {
-    setCurrentMovie(movie);
-  };
 
   return (
     <div className="m-10">
@@ -41,9 +36,8 @@ const SimilarMovies = ({ genreIds }) => {
             <Row gutter={16}>
               <Col span={24}>
                 <Card
-                  className="border-y-4 border-purple-600 m-3"
+                  className="border-y-4 border-purple-600 m-3 bg-black bg-opacity-50"
                   hoverable
-                  onClick={() => handleCardClick(movie)}
                   cover={
                     <img
                       className="h-64 w-auto object-cover"
@@ -56,9 +50,13 @@ const SimilarMovies = ({ genreIds }) => {
                   bodyStyle={{ padding: "8px" }}
                 >
                   <Card.Meta
-                    title={movie.english_title}
+                    title={
+                      <div className="font-sans font-semibold text-white">
+                        {movie.english_title}
+                      </div>
+                    }
                     description={
-                      <div className="font-sans font-semibold text-lightgrey">
+                      <div className="font-sans text-white">
                         <p>IMDB rating: {movie.imdb}</p>
                         <p>Release date: {movie.release_date}</p>
                         <p>Duration: {movie.runtime} min</p>

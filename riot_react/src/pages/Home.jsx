@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Home() {
+  const [isFetching, setIsFetching] = useState(false);
   const [spin, setSpin] = useState(0);
   const classes = useStyles();
   const [isAtTop, changeGoToTop] = useState(false);
@@ -47,7 +48,7 @@ function Home() {
   const [startIndex, changeStartIndex] = useState(0);
   const [isSearched, changeIsSearched] = useState("");
   const debounceTimeoutId = useRef(null);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [movieGenre, setMovieGenre] = useState([false]);
   const [movieYear, setMovieYear] = useState([false]);
   const [selectedFilter, setSelectedFilter] = useState(null);
@@ -117,18 +118,21 @@ function Home() {
   const movieList = async (searchText) => {
     try {
       let response;
-      // setLoading(true);
+      setLoading(true);
       const endpoint = searchText
-          ? `api?title=${searchText}`
-          : `api?startIndex=${startIndex}`;
+        ? `api?english_title=${searchText}`
+        : `api?startIndex=${startIndex}`;
       response = await fetch(endpoint);
-      // setLoading(false);
+      setLoading(false);
       if (!response.ok) {
         throw new Error(
             `Error: Failed to load resource: the server responded with a status of ${response.status}`
         );
       }
       const data = await response.json();
+      if (data.length === 20) {
+        changeStartIndex(startIndex + 20);
+      }
       setSearchedArray(
           searchText
               ? data
@@ -138,51 +142,78 @@ function Home() {
       console.error(err);
     }
   };
+
   useEffect(() => {
     movieList();
   }, [startIndex]);
+  const handleSearch = useCallback(
+    async (text) => {
+      if (text.length >= 2) {
+        if (debounceTimeoutId.current) {
+          clearTimeout(debounceTimeoutId.current);
+        }
+
+        debounceTimeoutId.current = setTimeout(async () => {
+          changeIsSearched(text);
+          try {
+            const response = await fetch(`api?title=${text}`);
+            if (!response.ok) {
+              throw new Error(
+                `Error: Failed to load resource: the server responded with a status of ${response.status}`
+              );
+            }
+            const data = await response.json();
+            let filteredArray = data.filter(function (obj) {
+              return obj.english_title
+                .toLowerCase()
+                .startsWith(text.toLowerCase()); // Use startsWith instead of includes
+            });
+            filteredArray.sort(function (a, b) {
+              // Sort the array based on the position of the search string in the title
+              const indexA = a.english_title
+                .toLowerCase()
+                .indexOf(text.toLowerCase());
+              const indexB = b.english_title
+                .toLowerCase()
+                .indexOf(text.toLowerCase());
+              return indexA - indexB;
+            });
+            let otherMoviesArray = data.filter(function (obj) {
+              return (
+                obj.english_title.toLowerCase().includes(text.toLowerCase()) &&
+                !filteredArray.includes(obj)
+              );
+            });
+            let finalArray = filteredArray.concat(otherMoviesArray);
+            setSearchedArray(finalArray);
+          } catch (err) {
+            console.error(`Error: ${err}`);
+          }
+        }, 500);
+      } else if (text.length === 0) {
+        changeIsSearched("");
+        setSearchedArray([]);
+        movieList();
+      }
+    },
+    [changeIsSearched, movieList]
+
+  );
+
   const handleScroll = useCallback(() => {
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-      changeStartIndex(startIndex + 20);
+    if (isSearched !== "" || isFetching) {
+      return;
     }
-  }, [startIndex, changeStartIndex]);
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+      changeStartIndex((startIndex) => startIndex + 20);
+    }
+  }, [isSearched, isFetching]);
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
-  const handleSearch = useCallback(
-      async (text) => {
-        if (debounceTimeoutId.current) {
-          clearTimeout(debounceTimeoutId.current);
-        }
-        debounceTimeoutId.current = setTimeout(async () => {
-          if (text !== null) {
-            changeIsSearched(text);
-            try {
-              const response = await fetch(`api?title=${text}`);
-              if (!response.ok) {
-                throw new Error(
-                    `Error: Failed to load resource: the server responded with a status of ${response.status}`
-                );
-              }
-              const data = await response.json();
-              let filteredArray = data.filter(function (obj) {
-                return obj.english_title
-                    .toLowerCase()
-                    .includes(text.toLowerCase());
-              });
-              setSearchedArray(filteredArray);
-            } catch (err) {
-              console.error(`Error: ${err}`);
-            }
-          } else {
-            setSearchedArray([]);
-            changeIsSearched("");
-          }
-        }, 300);
-      },
-      [changeIsSearched, setSearchedArray]
-  );
+
   useEffect(() => {
     const handleScroll = () => {
       changeGoToTop(window.scrollY > 200);
@@ -208,77 +239,105 @@ function Home() {
           <br></br>
           <br></br>
         </div>
-        <div>
-          <div className="mt-12 right-8 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-3">
-            <Autorenew
-                className={spin ? classes.spin : classes.refresh}
-                onClick={refreshCanvas}
-                spin={spin}
-            />
-          </div>
-          <Button
-              id="demo-customized-button"
-              aria-controls={open ? "demo-customized-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-              class="text-black font-sans ml-7 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
-          >
-            GENRE
-          </Button>
-          <StyledMenu
-              id="simple-menu"
-              anchorEl={anchorElMovieGenre}
-              keepMounted
-              open={Boolean(anchorElMovieGenre)}
-              onClose={() => setAnchorElMovieGenre(null)}
-          >
-            {movieGenre.map((option, i) => (
-                <MenuItem
-                    key={i}
-                    onClick={() => {
-                      handleClose(option.id);
-                    }}
-                >
-                  {option.name}
-                </MenuItem>
-            ))}
-          </StyledMenu>
-          <Button
-              id="demo-customized-button"
-              aria-controls={open ? "demo-customized-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClickYearButton}
-              endIcon={<KeyboardArrowDownIcon />}
-              class="text-black font-sans ml-3 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-6 py-2.5 text-center mr-2"
-          >
-            YEAR
-          </Button>
-          <StyledMenu
-              id="simple-menu"
-              anchorEl={anchorElMovieYear}
-              keepMounted
-              open={Boolean(anchorElMovieYear)}
-              onClose={() => setAnchorElMovieYear(null)}
-          >
-            {movieYear.map((option, i) => (
-                <MenuItem
-                    key={i}
-                    onClick={() => {
-                      handleCloseYear(option);
-                    }}
-                >
-                  {option}
-                </MenuItem>
-            ))}
-          </StyledMenu>
-        </div>
-        <div
-            className={`md:grid md:grid-cols-3 md:gap-3 ${
-                searchedArray.length ? "" : "hidden"
-            }`}
+        <Button
+          id="demo-customized-button"
+          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDownIcon />}
+          class="text-black font-sans ml-7 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+        >
+          GENRE
+        </Button>
+        <StyledMenu
+          id="simple-menu"
+          anchorEl={anchorElMovieGenre}
+          keepMounted
+          open={Boolean(anchorElMovieGenre)}
+          onClose={() => setAnchorElMovieGenre(null)}
+        >
+          {movieGenre.map((option, i) => (
+            <MenuItem
+              key={i}
+              onClick={() => {
+                handleClose(option.id);
+              }}
+            >
+              {option.name}
+            </MenuItem>
+          ))}
+        </StyledMenu>
+        <Button
+          id="demo-customized-button"
+          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClickYearButton}
+          endIcon={<KeyboardArrowDownIcon />}
+          class="text-black font-sans ml-3 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-6 py-2.5 text-center mr-2"
+        >
+          YEAR
+        </Button>
+        <StyledMenu
+          id="simple-menu"
+          anchorEl={anchorElMovieYear}
+          keepMounted
+          open={Boolean(anchorElMovieYear)}
+          onClose={() => setAnchorElMovieYear(null)}
+        >
+          {movieYear.map((option, i) => (
+            <MenuItem
+              key={i}
+              onClick={() => {
+                handleCloseYear(option);
+              }}
+            >
+              {option}
+            </MenuItem>
+          ))}
+        </StyledMenu>
+      </div>
+      <div
+        className={`md:grid md:grid-cols-3 md:gap-3 ${
+          searchedArray.length ? "" : "hidden"
+        }`}
+      >
+        {searchedArray ? (
+          searchedArray.map((e, i) => {
+            return (
+              <MovieCard
+                key={i}
+                id={e.id}
+                enName={e.english_title}
+                img={e.backdrop_path}
+                imbd={e.imdb}
+                object={e}
+                time={Math.floor(e.runtime / 60) + "h" + (e.runtime % 60)}
+                year={new Date(e.release_date).getFullYear()}
+              />
+            );
+          })
+        ) : (
+          <h4 className="text-white text-center p-20 font-bold flex-col items-center">
+            No results found
+          </h4>
+        )}
+      </div>
+      <div id="searched" className="px-6 py-4">
+        {isSearched !== "" ? (
+          <h4 className="text-white text-center m-0 font-medium p-5 flex-col items-center">
+            You've searched: {isSearched}
+          </h4>
+        ) : (
+          ""
+        )}
+        <button
+          className={`text-black font-sans bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-2.5 py-2.5 text-center ${
+            isAtTop ? "" : "hidden"
+          }`}
+          style={{ position: "fixed", right: "10px", top: "10px" }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           {searchedArray.length > 0 ? (
               searchedArray.map((e, i) => {

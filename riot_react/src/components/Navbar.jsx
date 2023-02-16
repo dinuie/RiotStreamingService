@@ -27,11 +27,12 @@ const Navbar = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const isLoggedIn = useCurrentUser();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      // navigate("/");
-    }
-  }, [isLoggedIn, navigate]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     // navigate("/");
+  //   }
+  // }, [isLoggedIn, navigate]);
+
   const handleProfile = () => {
     window.location.href = "/Profile";
   };
