@@ -16,6 +16,8 @@ React
 JWT Token  
 Hibernate  
 
-This project contains features like Login/Logout , Register, Infinite Scrolling, Year/Genre sorting for the movies, Search function, My Profile page which contains the user details, Active Streaming of any movie that is present on the platform, Movie suggestions based on the genre, Ability to like any movie and adding them in a list in the user profile.
-![Homepage](https://user-images.githubusercontent.com/100032003/219305203-51c8d0cb-6fba-45e4-9e9a-f4b92407849e.png)
+This project contains features like Login/Logout , Register, Infinite Scrolling, Year/Genre sorting for the movies, Search function, My Profile page which contains the user details, Active Streaming of any movie that is present on the platform, Movie suggestions based on the genre, Ability to like any movie and adding them in a list in the user profile.  
+
+![Homepage](https://user-images.githubusercontent.com/100032003/219306184-5233cbbc-0ac9-4fcb-9e0a-aa65b6ac9476.png)  
+
 ![Profile](https://user-images.githubusercontent.com/100032003/219305222-1d24e304-ae4d-406a-9193-faac515e791e.png)
