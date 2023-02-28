@@ -7,8 +7,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Component;
-
 import javax.sql.DataSource;
+
 
 @Component
 public class InitializeData {
@@ -20,12 +20,9 @@ public class InitializeData {
     public void loadData() {
         Resource resource1 = new ClassPathResource("roles.sql");
         Resource resource2 = new ClassPathResource("moviegenre.sql");
-        Resource resource3 = new ClassPathResource("movies.sql");
         ResourceDatabasePopulator populator1 = new ResourceDatabasePopulator(false, false, "UTF-8", resource1);
         ResourceDatabasePopulator populator2 = new ResourceDatabasePopulator(false, false, "UTF-8", resource2);
-        ResourceDatabasePopulator populator3 = new ResourceDatabasePopulator(false, false, "UTF-8", resource3);
         populator1.execute(dataSource);
         populator2.execute(dataSource);
-        populator3.execute(dataSource);
     }
 }
