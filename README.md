@@ -32,3 +32,18 @@ My Profile page which contains the user details <br>
 Active Streaming of any movie that is present on the platform <br>
 Movie suggestions based on the genre <br>
 Ability to like any movie and adding them in a list in the user profile. 
+
+## Welcome page 
+![1](https://user-images.githubusercontent.com/23395284/221869708-95c55ba2-39a6-4f01-84c6-e3bed0e43592.png)
+
+## Home page
+![3](https://user-images.githubusercontent.com/23395284/221869744-a9085d4b-c173-4839-aa8a-f6c39459bbbb.jpg)
+
+## Watch page
+![unnamed](https://user-images.githubusercontent.com/23395284/221869818-821daf7d-3a06-444a-b405-f2cd95887cd4.jpg)
+
+## My profile page
+![2](https://user-images.githubusercontent.com/23395284/221869926-63fbe488-a20e-4715-845e-c8102fce82b0.jpg)
+
+
+
