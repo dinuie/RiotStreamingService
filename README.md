@@ -4,33 +4,30 @@ Riot Streaming Service provides effortless access to all your favorite movies, e
 ## 🚀 Getting Started
 To run this project, you must clone the repository and follow these steps: <br>
 
-Run the RiotApplication with an IDE (IntelliJ Idea, Visual Studio Code) <br>
+Open the riot folder and run the RiotApplication with an IDE <br>
 Open the riot_react folder with an IDE <br>
 Type npm/yarn install in the terminal to install dependencies <br>
 Type npm start/yarn start in the terminal to start the app <br>
-Alternatively, you can start the project in Docker by running docker-compose up. 
+Alternatively, you can start the project in Docker by running "docker compose up" for the server and database. The client part should be runned by "npm/yarn start". 
 
 ## 💻 Main Technologies Used
-Java <br>
-JavaScript <br>
+Spring Boot <br>
 PostgreSQL <br>
-Tailwind <br>
-MUI <br>
-SpringBoot <br>
 React <br>
 JWT Token <br>
 Hibernate <br>
+Tailwind <br>
+MUI <br>
 ## 🎥 Features
 This project includes the following features: <br>
 
-Login/Logout <br>
-Register <br>
+Sign In / Sign Up <br>
 Infinite Scrolling <br>
 Year/Genre sorting for the movies <br>
 Search function <br>
-My Profile page which contains the user details <br>
+My Profile page which contains the user details and user's Watchlist <br>
 Active Streaming of any movie that is present on the platform <br>
-Movie suggestions based on the genre <br>
+Movie suggestions based on the genres <br>
 Ability to like any movie and adding them in a list in the user profile. 
 
 ## Welcome page 
