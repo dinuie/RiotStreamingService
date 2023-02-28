@@ -1,15 +1,15 @@
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-SET default_tablespace = '';
-SET default_table_access_method = heap;
+--
+-- SET statement_timeout = 0;
+-- SET lock_timeout = 0;
+-- SET idle_in_transaction_session_timeout = 0;
+-- SET standard_conforming_strings = on;
+-- SELECT pg_catalog.set_config('search_path', '', false);
+-- SET check_function_bodies = false;
+-- SET xmloption = content;
+-- SET client_min_messages = warning;
+-- SET row_security = off;
+-- SET default_tablespace = '';
+-- SET default_table_access_method = heap;
 INSERT INTO public.movies VALUES (11, '/ykY0slSctjGBqWhTJJYzIDOs9NY.jpg', 'The Godfather: Part II', '6C9124FE9A99B2001FAD76A76152691BC515A80D', 9, 'tt0071562', '1974-12-20', 202, 'Bố Già 2', NULL, NULL);
 INSERT INTO public.movies VALUES (7, '/3nDF7iOHUxjSV5GazK0cq1t9xUo.jpg', 'The Good, the Bad and the Ugly', '061E0F98A9D5C171D09CE5C1F11965032FFD1B82', 8.8, 'tt0060196', '1966-12-23', 161, 'Thiện, Ác, Tà', NULL, NULL);
 INSERT INTO public.movies VALUES (15, '/6jycQtEorKgmcsi9AeYBrRxlpqu.jpg', 'The Empire Strikes Back', '898880149B304FEAA5FF6F6DE633AA4C5703DC1A', 8.7, 'tt0080684', '1980-05-20', 124, 'Chiến Tranh Giữa Các Vì Sao 5: Đế Chế Phản Công', NULL, NULL);
