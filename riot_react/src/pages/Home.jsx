@@ -114,6 +114,7 @@ function Home() {
   };
   const movieList = async (searchText) => {
     try {
+      console.log(searchText);
       let response;
       setLoading(true);
       const endpoint = searchText

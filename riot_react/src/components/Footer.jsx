@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white text-center font-sans py-0.5 absolute bottom-0 w-full">
+    <footer className="bg-black text-white text-center font-sans py-0.5 absolute bottom-0 w-full bg-opacity-0">
 
       <div className="flex justify-center">
         <a href="#">
