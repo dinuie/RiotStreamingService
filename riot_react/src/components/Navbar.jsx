@@ -44,7 +44,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className="flex items-center justify-between p-4 z-[100] w-full absolute">
+    <div className="flex items-center justify-between p-3 z-[100] w-full absolute">
       <Link to="/">
         <h1 className="text-purple-600 hover:text-pink-500 font-sans font-semibold text-3xl">
           RIOT STREAMING SERVICE

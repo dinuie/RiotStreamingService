@@ -46,12 +46,12 @@ const Watch = (props) => {
       });
   }, [id]);
   return (
-    <Container>
+    <div className="">
       <Navbar showSearchBox={false} />
       {isLoggedIn && (
-        <div className="bg-gray-900 h-screen flex items-center justify-center">
+        <div className="bg-gray-900 h-screen flex items-center justify-center shadow-sm max-w-sm mx-auto sm:max-w-7xl">
           <div className="text-white text-center p-20 font-sans">
-            <div className="absolute">
+            <div className="">
               <Link to="/home">
                 <button className="bg-black hover:bg-purple-600 hover:text-black text-purple-600 py-2 px-4 rounded">
                   <IoMdArrowRoundBack />
@@ -104,7 +104,7 @@ const Watch = (props) => {
           </div>
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 export default Watch;
