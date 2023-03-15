@@ -72,7 +72,7 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
             src={"https://image.tmdb.org/t/p/w500" + img}
           />
         ) : (
-          <div className="w-full rounded-xl bg-cover bg-gray-400">
+          <div className="w-full rounded-xl bg-cover">
             No Image Available
           </div>
         )}

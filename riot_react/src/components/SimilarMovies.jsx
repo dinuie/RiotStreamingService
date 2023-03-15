@@ -22,7 +22,7 @@ const SimilarMovies = ({ genreIds }) => {
       <Carousel
         dots={false}
         infinite
-        autoplay
+        autoplay={false}
         speed={300}
         slidesToShow={3}
         slidesToScroll={1}
