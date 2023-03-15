@@ -39,53 +39,44 @@ const Watch = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col  bg-gradient-to-br from-purple-900 to-pink-500">
       <Navbar showSearchBox={false} />
       {isLoggedIn && (
         <div className="flex flex-col flex-grow max-w-7xl mx-auto">
-          <div className="relative flex-grow">
+          <div className="h-screen relative flex-grow">
             <div
-              className="absolute inset-0 bg-center bg-no-repeat bg-cover"
+              className="absolute inset-0 bg-center bg-no-repeat"
               style={{
                 backgroundImage: `url('https://image.tmdb.org/t/p/w500${movie?.backdrop_path}')`,
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black opacity-75" />
               <div className="absolute inset-0 p-5 lg:p-10 flex flex-col justify-between">
-                <div className="flex justify-start">
-                  <Link to="/home">
-                    <button className="bg-black hover:bg-purple-600 hover:text-black text-purple-600 py-2 px-4 rounded">
-                      <IoMdArrowRoundBack />
-                    </button>
-                  </Link>
-                </div>
+                <div className="flex justify-start"></div>
                 <div className="text-white text-center">
-                  <h2 className="text-3xl lg:text-4xl font-semibold mb-5">
+                  <h2 className="text-3xl lg:text-4xl font-sans font-semibold mb-5">
                     {movie?.english_title}
                   </h2>
                   <div className="flex flex-col lg:flex-row justify-center">
-                    <div className="mr-0 lg:mr-4 mb-4 lg:mb-0">
+                    <div className="font-sans font-semibold mr-0 lg:mr-4 mb-4 lg:mb-0">
                       <h2>
-                        IMDb: {movie?.imdb}
-                        <FontAwesomeIcon
-                          className="ml-1 text-yellow-400 shadow-lg font-bold"
-                          icon={faStar}
-                        />
+                        IMDb:{" "}
+                        <span className="text-yellow-400 shadow-lg font-bold">
+                          {movie?.imdb}
+                          <FontAwesomeIcon icon={faStar} />
+                        </span>
                       </h2>
                       <h2 className="hidden lg:block">
                         Release: {movie?.release_date}
                       </h2>
                       <h2>
-                        Duration:{" "}
-                        {Math.floor(movie?.runtime / 60) +
-                          "h" +
-                          (movie?.runtime % 60) +
-                          "m"}
+                        Duration: {Math.floor(movie?.runtime / 60)}h
+                        {movie?.runtime % 60}m
                       </h2>
                     </div>
                     <div>
-                      <h2>
-                        Genres:
+                      <h2 className="font-sans font-semibold">
+                        Genres:{" "}
                         {movieGenre.map((option, i) => (
                           <span
                             key={i}
@@ -101,15 +92,22 @@ const Watch = () => {
               </div>
             </div>
           </div>
-          <div className="flex-grow-0 py-5 px-5 lg:px-10 bg-black">
+          <div className="bg-black">
             <TorServer
               movieId={id}
               hash={movie?.hash}
-              backdrop_path={movie?.backdrop_path}
+              // backdrop_path={movie?.backdrop_path}
             />
           </div>
-          <div className="bg-gray-900 py-5">
-            <SimilarMovies genreIds={movie?.genre_ids} />
+          <div className="bg-gray-900 py-12">
+            <h2 className="text-white font-sans px-5 text-2xl font-semibold">
+              You might also like:
+            </h2>
+            <div className="">
+              <SimilarMovies genreIds={movie?.genre_ids} />
+            </div>
+            <br></br>
+            <br></br>
           </div>
         </div>
       )}

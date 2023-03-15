@@ -4,7 +4,6 @@ import {
   checkUsernameAvailability,
   checkEmailAvailability,
 } from "../util/ApiUtils";
-import "./Signup.css";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, notification } from "antd";
 import {
@@ -16,6 +15,7 @@ import {
   PASSWORD_MIN_LENGTH,
   PASSWORD_MAX_LENGTH,
 } from "../constants";
+import Navbar from "../components/Navbar";
 
 const FormItem = Form.Item;
 const current = new Date().toISOString().split("T")[0];
@@ -98,16 +98,13 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="outer-container">
-        <div
-          className="signup-container"
-          style={{ backgroundColor: "#111827" }}
-        >
-          <h1 className="page-title">Sign Up</h1>
-          <div className="signup-content">
-            <form onSubmit={this.handleSubmit} className="signup-form">
+      <div className="">
+        <Navbar showSearchBox={false} />
+        <div className="fixed inset-0 flex justify-center items-center bg-gradient-to-br from-purple-900 to-pink-500">
+          <div className="bg-white p-8 rounded shadow-md w-96">
+            <form onSubmit={this.handleSubmit}>
               <FormItem
-                label={<span style={{ color: "#9932CC" }}>Full Name</span>}
+                label={<span className="text-purple-500">Full Name</span>}
                 validateStatus={this.state.name.validateStatus}
                 help={this.state.name.errorMsg}
               >
@@ -123,7 +120,7 @@ class Signup extends Component {
                 />
               </FormItem>
               <FormItem
-                label={<span style={{ color: "#9932CC" }}>Username</span>}
+                label={<span className="text-purple-500">Username</span>}
                 hasFeedback
                 validateStatus={this.state.username.validateStatus}
                 help={this.state.username.errorMsg}
@@ -141,7 +138,7 @@ class Signup extends Component {
                 />
               </FormItem>
               <FormItem
-                label={<span style={{ color: "#9932CC" }}>Date of Birth</span>}
+                label={<span className="text-purple-500">Date of Birth</span>}
                 validateStatus={this.state.userDateOfBirth.validateStatus}
               >
                 <Input
@@ -156,7 +153,7 @@ class Signup extends Component {
                 />
               </FormItem>
               <FormItem
-                label={<span style={{ color: "#9932CC" }}>Email</span>}
+                label={<span className="text-purple-500">Email</span>}
                 hasFeedback
                 validateStatus={this.state.email.validateStatus}
                 help={this.state.email.errorMsg}
