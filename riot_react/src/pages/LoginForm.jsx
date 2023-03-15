@@ -16,12 +16,8 @@ export default function LoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("values");
-    console.log(usernameOrEmail);
-    console.log(password);
     login({ usernameOrEmail, password })
       .then((response) => {
-        console.log(response.json);
         localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         getUserId(usernameOrEmail).then((data) =>
           localStorage.setItem("userId", data.id)

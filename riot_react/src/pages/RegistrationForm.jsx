@@ -62,14 +62,12 @@ class Signup extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("ajunge in submit");
     const signupRequest = {
       email: this.state.email.value,
       username: this.state.username.value,
       userDateOfBirth: this.state.userDateOfBirth.value,
       password: this.state.password.value,
     };
-    console.log("ajunge in regster");
     signup(signupRequest)
       .then((response) => {
         notification.success({
@@ -267,6 +265,20 @@ class Signup extends Component {
       };
     }
 
+    const domain = email.split('@')[1].split('.')[0];
+
+    if (domain === "gmail" && !email.endsWith(".com")) {
+      return {
+        validateStatus: "error",
+        errorMsg: "Gmail addresses must end in .com",
+      };
+    } else if (domain === "yahoo" && !email.endsWith(".ru") && !email.endsWith(".com")) {
+      return {
+        validateStatus: "error",
+        errorMsg: "Yahoo addresses must end in .ru or .com",
+      };
+    }
+
     if (email.length > EMAIL_MAX_LENGTH) {
       return {
         validateStatus: "error",
@@ -279,6 +291,7 @@ class Signup extends Component {
       errorMsg: null,
     };
   };
+
 
   validDateOfBirth = (dateOfBirth) => {
     if (dateOfBirth != "mm/dd/yyyy") {
@@ -369,11 +382,8 @@ class Signup extends Component {
   }
 
   validateEmailAvailability() {
-    // First check for client side errors in email
     const emailValue = this.state.email.value;
     const emailValidation = this.validateEmail(emailValue);
-    console.log(emailValidation);
-    console.log("ssssssssssssssssss1111111111");
     if (emailValidation.validateStatus === "error") {
       this.setState({
         email: {

@@ -50,7 +50,6 @@ const ProfilePage = () => {
 
         try {
             const response = await changePassword(currentPassword, newPassword);
-            console.log(response);
             if (response.message === "Your password is updated") {
                 notification.success({ description: "Your password is updated" });
             } else {
@@ -60,6 +59,7 @@ const ProfilePage = () => {
             console.log(error.message);
         }
     };
+
     const validatePassword = (password) => {
         const regexUpper = /[A-Z]/;
         const regexLower = /[a-z]/;
