@@ -3,7 +3,8 @@ import { getMovieById } from "../util/ApiUtils";
 
 const TorServer = ({ movieId, hash, backdrop_path }) => {
   const [movieObject, setMovieObject] = useState({});
-  
+  const [loading, setLoading] = useState(true);
+
   const fetchMovieById = useCallback(async () => {
     try {
       const response = await getMovieById(movieId);
@@ -11,6 +12,8 @@ const TorServer = ({ movieId, hash, backdrop_path }) => {
       setMovieObject(data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   }, [movieId]);
 
@@ -50,12 +53,20 @@ const TorServer = ({ movieId, hash, backdrop_path }) => {
   }, [hash, backdrop_path]);
 
   useEffect(() => {
-    window.webtor = window.webtor || [];
-    window.webtor.push(webtor);
-    console.log(window.webtor);
-  }, [webtor]);
+    if (!loading) {
+      window.webtor = window.webtor || [];
+      window.webtor.push(webtor);
+      console.log(window.webtor);
+    }
+  }, [loading, webtor]);
 
-  return <div id="player" className="webtor w-full"></div>;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div id="player" className="webtor flex justify-center items-center"></div>
+  );
 };
 
 export default TorServer;

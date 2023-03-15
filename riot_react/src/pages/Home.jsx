@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import Footer from "../components/Footer";
 const useStyles = makeStyles((theme) => ({
   genreMenu: {
     backgroundColor: "black !important",
@@ -348,6 +349,7 @@ function Home() {
           </button>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
