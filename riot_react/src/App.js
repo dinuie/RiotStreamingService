@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
-import RegistrationForm from "./pages/RegistrationForm";
+import Signup from "./pages/RegistrationForm";
 import LoginForm from "./pages/LoginForm";
 import React, { useEffect } from "react";
 import Watch from "./pages/Watch";
@@ -27,7 +27,7 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/auth/register" element={<RegistrationForm />} />
+            <Route path="/auth/register" element={<Signup />} />
             <Route path="/auth/login" element={<LoginForm />} />
             <Route path="/watch/:id" element={<Watch />} />
             <Route path="/home" element={<Home />} />
