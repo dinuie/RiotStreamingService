@@ -9,4 +9,7 @@ body {
   overflow: y-auto;
   height: 100%;
   font-family: "Lato";
+  background: linear-gradient(to bottom right, #4b0082, #ff69b4);
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
 }
