@@ -7,9 +7,11 @@
 #root,
 body {
   overflow: y-auto;
-  height: 100%;
+  height: 100vh;
   font-family: "Lato";
-  background: linear-gradient(to bottom right, #4b0082, #ff69b4);
+  background: linear-gradient(to right, #4b0082, #800080);
+  margin: 0;
+  padding: 0;
   /* background-size: cover; */
   /* background-repeat: no-repeat; */
 }

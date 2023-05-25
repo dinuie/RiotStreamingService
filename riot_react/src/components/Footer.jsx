@@ -9,7 +9,6 @@ import {
 const Footer = () => {
   return (
     <footer className="fixed bg-black text-white text-center font-sans py-0.5 mx-auto bottom-0 w-full bg-opacity-25">
-
       <div className="flex justify-center">
         <a href="#">
           <FontAwesomeIcon

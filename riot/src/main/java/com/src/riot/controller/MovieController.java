@@ -5,11 +5,9 @@ import com.src.riot.model.MovieGenre;
 import com.src.riot.service.MovieGenreService;
 import com.src.riot.service.MovieService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.lang.model.util.Elements;
 import java.util.List;
 import java.util.Set;
 

@@ -165,10 +165,9 @@ function Home() {
             let filteredArray = data.filter(function (obj) {
               return obj.english_title
                 .toLowerCase()
-                .startsWith(text.toLowerCase()); // Use startsWith instead of includes
+                .startsWith(text.toLowerCase());
             });
             filteredArray.sort(function (a, b) {
-              // Sort the array based on the position of the search string in the title
               const indexA = a.english_title
                 .toLowerCase()
                 .indexOf(text.toLowerCase());
@@ -356,7 +355,6 @@ function Home() {
           </button>
         </div>
       </div>
-      {/* <Footer></Footer> */}
     </div>
   );
 }

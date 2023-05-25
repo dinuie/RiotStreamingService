@@ -8,9 +8,20 @@ const SimilarMovies = ({ genreIds, history }) => {
 
   useEffect(() => {
     const fetchSimilarMovies = async () => {
-      const response = await getMovieByGenre(genreIds[0]);
-      setMovies(response);
+      const moviesByGenre = await Promise.all(
+        genreIds.slice(0, 3).map(async (genreId) => {
+          const movies = await getMovieByGenre(genreId);
+          return movies;
+        })
+      );
+
+      const matchedMovies = moviesByGenre.reduce((acc, movies) => {
+        return acc.filter((movie) => movies.some((m) => m.id === movie.id));
+      });
+
+      setMovies(matchedMovies);
     };
+
     fetchSimilarMovies();
   }, [genreIds]);
 

@@ -39,7 +39,7 @@ const Watch = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen flex flex-col  bg-gradient-to-br from-purple-900 to-pink-500">
+    <div className="min-h-screen flex flex-col">
       <Navbar showSearchBox={false} />
       {isLoggedIn && (
         <div className="flex flex-col flex-grow max-w-7xl mx-auto">

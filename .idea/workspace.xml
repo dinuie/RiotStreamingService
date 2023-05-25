@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a89cf2a-d4b9-4c80-b7de-2a00f28e7c9c" name="Changes" comment="" />
+    <list default="true" id="5a89cf2a-d4b9-4c80-b7de-2a00f28e7c9c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/riot_react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/riot_react/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/riot_react/src/pages/Watch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/riot_react/src/pages/Watch.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +27,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Codecool/KATAS",
+    "last_opened_file_path": "D:/Codecool/Advanced/WEEK1/el-proyecte-grande-sprint-1-java-MaxOverPowered",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
     "vue.rearranger.settings.migration": "true"
   }
@@ -37,6 +48,7 @@
       <workItem from="1677592232282" duration="127000" />
       <workItem from="1677592376923" duration="107000" />
       <workItem from="1677743368860" duration="18000" />
+      <workItem from="1678866336903" duration="936000" />
     </task>
     <servers />
   </component>
