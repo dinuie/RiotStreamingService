@@ -31,16 +31,21 @@ Movie suggestions based on the genres <br>
 Ability to like any movie and adding them in a list in the user profile. 
 
 ## Welcome page 
-![1](https://user-images.githubusercontent.com/23395284/221869708-95c55ba2-39a6-4f01-84c6-e3bed0e43592.png)
+![ff0ccbbee4e20d5cd7d2238aacd3a0b3](https://github.com/dinuie/RiotStreamingService/assets/23395284/f79ac49c-1510-4d65-85b1-62b330039236)
+
 
 ## Home page
-![3](https://user-images.githubusercontent.com/23395284/221869744-a9085d4b-c173-4839-aa8a-f6c39459bbbb.jpg)
+![b9ab44327166a400e79a7e84cfffe76e](https://github.com/dinuie/RiotStreamingService/assets/23395284/dea199d2-2151-41bd-a191-95acab66768b)
+
 
 ## Watch page
-![unnamed](https://user-images.githubusercontent.com/23395284/221869818-821daf7d-3a06-444a-b405-f2cd95887cd4.jpg)
+![063a58a6ab33b068b48f010a2239d381](https://github.com/dinuie/RiotStreamingService/assets/23395284/a71efeb0-3cc8-4d64-9b80-788c237824ef)
+
+![Untitled](https://github.com/dinuie/RiotStreamingService/assets/23395284/c2d9545b-1ee8-404a-92c8-2eb5c5affdfd)
 
 ## My profile page
-![2](https://user-images.githubusercontent.com/23395284/221869926-63fbe488-a20e-4715-845e-c8102fce82b0.jpg)
+![e028709e66855f5161d2caf72c948a05](https://github.com/dinuie/RiotStreamingService/assets/23395284/97bc290e-b56c-4dd7-920a-25204dfbc1aa)
+
 
 
 
