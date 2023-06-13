@@ -254,35 +254,41 @@ const ProfilePage = () => {
             <h2 className="text-3xl font-sans font-semibold mb-5">
               Your Watchlist
             </h2>
-            <Carousel
-              dots={false}
-              infinite={movies.length > 2}
-              autoplay
-              speed={300}
-              slidesToShow={3}
-              slidesToScroll={1}
-            >
-              {movies.length > 0 ? (
-                movies.map((e, i) => {
-                  return (
-                    <MovieCard
-                      key={i}
-                      id={e.id}
-                      enName={e.english_title}
-                      img={e.backdrop_path}
-                      imbd={e.imdb}
-                      object={e}
-                      time={e.runtime + "min"}
-                      year={new Date(e.release_date).getFullYear()}
-                    />
-                  );
-                })
-              ) : (
-                <h4 className="text-white text-center p-20 font-bold flex-col items-center">
-                  Your Watchlist is empty
-                </h4>
-              )}
-            </Carousel>
+            <div className="flex justify-center">
+              <div className="w-full max-w-4xl">
+                <Carousel
+                  dots={false}
+                  infinite={movies.length > 5}
+                  autoplay
+                  speed={300}
+                  slidesToShow={3}
+                  slidesToScroll={1}
+                  className="" // Set a specific height for the Carousel container
+                >
+                  {movies.length > 0 ? (
+                    movies.map((e, i) => {
+                      return (
+                        <div key={i} className="p-2">
+                          <MovieCard
+                            id={e.id}
+                            enName={e.english_title}
+                            img={e.backdrop_path}
+                            imbd={e.imdb}
+                            object={e}
+                            time={e.runtime + "min"}
+                            year={new Date(e.release_date).getFullYear()}
+                          />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <h4 className="text-white text-center p-20 font-bold flex-col items-center">
+                      Your Watchlist is empty
+                    </h4>
+                  )}
+                </Carousel>
+              </div>
+            </div>
           </div>
         </div>
       )}

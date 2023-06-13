@@ -66,7 +66,7 @@ function MovieCard({ id, enName, year, imbd, time, img }) {
         {img ? (
           <img
             name="image"
-            className="w-full h-60 rounded-xl bg-cover"
+            className="w-full h-fit rounded-xl bg-cover object-contain"
             alt={enName}
             src={"https://image.tmdb.org/t/p/w500" + img}
           />
