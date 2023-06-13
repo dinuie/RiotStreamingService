@@ -8,17 +8,42 @@ const SimilarMovies = ({ genreIds, history }) => {
 
   useEffect(() => {
     const fetchSimilarMovies = async () => {
+      let genresToSearch = genreIds;
+
+      if (genresToSearch.length > 3) {
+        genresToSearch = genresToSearch.slice(0, 3);
+      }
+
       const moviesByGenre = await Promise.all(
-        genreIds.slice(0, 3).map(async (genreId) => {
+        genresToSearch.map(async (genreId) => {
           const movies = await getMovieByGenre(genreId);
           return movies;
         })
       );
 
-      const matchedMovies = moviesByGenre.reduce((acc, movies) => {
-        return acc.filter((movie) => movies.some((m) => m.id === movie.id));
-      });
+      const matchedMoviesMap = new Map();
 
+      if (genresToSearch.length === 1) {
+        // Only one genre, add all movies of that genre
+        for (const movie of moviesByGenre[0]) {
+          matchedMoviesMap.set(movie.id, movie);
+        }
+      } else {
+        // Multiple genres, find movies that match all genres
+        const chosenMovieIds = new Set(
+          moviesByGenre[0].map((movie) => movie.id)
+        );
+        for (let i = 1; i < moviesByGenre.length; i++) {
+          const genreMovies = moviesByGenre[i];
+          for (const movie of genreMovies) {
+            if (chosenMovieIds.has(movie.id)) {
+              matchedMoviesMap.set(movie.id, movie);
+            }
+          }
+        }
+      }
+
+      const matchedMovies = Array.from(matchedMoviesMap.values());
       setMovies(matchedMovies);
     };
 
@@ -49,9 +74,7 @@ const SimilarMovies = ({ genreIds, history }) => {
                   cover={
                     <img
                       className="h-64 w-auto object-cover"
-                      src={
-                        `https://image.tmdb.org/t/p/w500` + movie.backdrop_path
-                      }
+                      src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
                       alt={movie.english_title}
                     />
                   }

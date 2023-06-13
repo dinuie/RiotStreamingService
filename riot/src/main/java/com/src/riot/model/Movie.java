@@ -19,9 +19,7 @@ public class Movie {
     @Id
     @Column(unique = true)
     private Long id;
-
     private Long tmbd_id;
-
     private String imdb_id;
     private String title;
     private String english_title;

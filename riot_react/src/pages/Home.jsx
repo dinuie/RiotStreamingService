@@ -237,73 +237,79 @@ function Home() {
         <br></br>
         <br></br>
       </div>
-      <div className="shadow-sm max-w-sm mx-auto sm:max-w-7xl bg-black relative bg-opacity-10 rounded-3xl mt-5">
-        <div>
-          <div className="mt-14 right-8 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-3">
+      <div className="shadow-sm max-w-sm mx-auto sm:max-w-7xl bg-black relative bg-opacity-10 rounded-3xl mt-5 px-5">
+        <div className="">
+          <div className="mt-10 mb-5 right-8 absolute text-black bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg px-3 py-1 text-center mr-3">
             <Autorenew
               className={spin ? classes.spin : classes.refresh}
               onClick={refreshCanvas}
               spin={spin}
             />
           </div>
-          <Button
-            id="demo-customized-button"
-            aria-controls={open ? "demo-customized-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            endIcon={<KeyboardArrowDownIcon />}
-            class="text-black font-sans ml-7 mb-0 mt-14 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2"
-          >
-            GENRE
-          </Button>
-          <StyledMenu
-            id="simple-menu"
-            anchorEl={anchorElMovieGenre}
-            keepMounted
-            open={Boolean(anchorElMovieGenre)}
-            onClose={() => setAnchorElMovieGenre(null)}
-          >
-            {movieGenre.map((option, i) => (
-              <MenuItem
-                key={i}
-                onClick={() => {
-                  handleClose(option.id);
-                }}
+          <div className="flex mb-4">
+            <div className="mr-2 mt-10">
+              <button
+                id="demo-customized-button-genre"
+                aria-controls={open ? "demo-customized-menu-genre" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+                className="text-black font-sans mb-0 ml-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-5 py-2.5 text-center"
               >
-                {option.name}
-              </MenuItem>
-            ))}
-          </StyledMenu>
-          <Button
-            id="demo-customized-button"
-            aria-controls={open ? "demo-customized-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClickYearButton}
-            endIcon={<KeyboardArrowDownIcon />}
-            class="text-black font-sans ml-3 mb-0 mt-10 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-6 py-2.5 text-center mr-2"
-          >
-            YEAR
-          </Button>
-          <StyledMenu
-            id="simple-menu"
-            anchorEl={anchorElMovieYear}
-            keepMounted
-            open={Boolean(anchorElMovieYear)}
-            onClose={() => setAnchorElMovieYear(null)}
-          >
-            {movieYear.map((option, i) => (
-              <MenuItem
-                key={i}
-                onClick={() => {
-                  handleCloseYear(option);
-                }}
+                GENRE
+              </button>
+              <StyledMenu
+                id="demo-customized-menu-genre"
+                anchorEl={anchorElMovieGenre}
+                keepMounted
+                open={Boolean(anchorElMovieGenre)}
+                onClose={() => setAnchorElMovieGenre(null)}
               >
-                {option}
-              </MenuItem>
-            ))}
-          </StyledMenu>
+                {movieGenre.map((option, i) => (
+                  <MenuItem
+                    key={i}
+                    onClick={() => {
+                      handleClose(option.id);
+                    }}
+                  >
+                    {option.name}
+                  </MenuItem>
+                ))}
+              </StyledMenu>
+            </div>
+            <div className="ml-2 mt-10">
+              <button
+                id="demo-customized-button-year"
+                aria-controls={open ? "demo-customized-menu-year" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClickYearButton}
+                endIcon={<KeyboardArrowDownIcon />}
+                className="text-black font-sans mb-0 bg-gradient-to-r from-purple-600 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-semibold rounded-lg text-sm px-6 py-2.5 text-center"
+              >
+                YEAR
+              </button>
+              <StyledMenu
+                id="demo-customized-menu-year"
+                anchorEl={anchorElMovieYear}
+                keepMounted
+                open={Boolean(anchorElMovieYear)}
+                onClose={() => setAnchorElMovieYear(null)}
+              >
+                {movieYear.map((option, i) => (
+                  <MenuItem
+                    key={i}
+                    onClick={() => {
+                      handleCloseYear(option);
+                    }}
+                  >
+                    {option}
+                  </MenuItem>
+                ))}
+              </StyledMenu>
+            </div>
+          </div>
         </div>
         <div
           className={`md:grid md:grid-cols-3 md:gap-5 ${

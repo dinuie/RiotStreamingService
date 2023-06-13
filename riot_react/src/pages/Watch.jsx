@@ -111,7 +111,7 @@ const Watch = () => {
           </div>
         </div>
       )}
-      <Footer />
+      
     </div>
   );
 };
